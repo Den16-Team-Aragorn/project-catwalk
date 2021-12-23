@@ -3,3 +3,6 @@ node_modules
 
 ## ignore env
 .env
+
+## ignore config.js file with API key
+backend/server/config.js
