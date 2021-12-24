@@ -9,7 +9,7 @@ const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-den';
 const controllers = {
 
   // ============================================
-  // PRODUCT HANDLERS
+  // PRODUCT HANDLERS -this is a comment!
   // ============================================
 
   // get all products
