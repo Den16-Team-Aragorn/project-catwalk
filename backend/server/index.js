@@ -1,5 +1,10 @@
+/* eslint-disable no-console */
+const path = require('path');
+const axios = require('axios');
 const express = require('express');
-const controllers = require('./controllers');
+const API_KEY = require('./config');
+
+const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-den';
 
 const app = express();
 
@@ -9,23 +14,24 @@ app.use(express.static(`${__dirname}/../../frontend/dist`));
 
 app.use(express.json());
 
-// product request handlers
-app.get('/api/products', controllers.controllers.getAllProducts);
-app.get('/api/products/id', controllers.controllers.getProductById);
-app.get('/api/products/styles', controllers.controllers.getProductStyles);
-app.get('/api/products/related', controllers.controllers.getRelatedProducts);
+app.use('/api/*', async (req, res) => {
+  console.log(API_KEY);
+  const payload = await axios({
+    method: req.method.toLowerCase(),
+    url: URL + req.originalUrl.slice(4),
+    headers: { Authorization: API_KEY.API_KEY },
+    data: req.body,
+  });
+  res.send(payload.data);
+});
 
-// review request handlers
-app.get('/api/reviews', controllers.controllers.getAllReviews);
-app.get('/api/reviews/meta', controllers.controllers.getReviewMeta);
-app.post('/api/reviews', controllers.controllers.postReview);
-app.put('/api/reviews/helpful', controllers.controllers.markReviewHelpful);
-app.put('/api/reviews/report', controllers.controllers.reportReviews);
-
-// cart request handlers
-
-// interactions request handlers
+app.get('*', (req, res) => {
+  res.sendFile('index.html', {
+    root: path.join(__dirname, '../../frontend/dist'),
+  });
+});
 
 app.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log('listening on port ', PORT);
 });
