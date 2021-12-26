@@ -1,0 +1,37 @@
+.header {
+  background-color: grey;
+  width: 70vw;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
+}
+
+.logo {
+  padding-left: 5%;
+}
+
+.search {
+  padding-right: 5%;
+}
+
+.overviewParent {
+  height: 100vh;
+  width: 70vw;
+  background-color: hotpink;
+  margin: auto;
+}
+
+.related {
+  height: 100vh;
+  width: 70vw;
+  background-color: greenyellow;
+  margin: auto;
+}
+
+.reviewParent {
+  height: 100vh;
+  width: 70vw;
+  background-color: cyan;
+  margin: auto;
+}
