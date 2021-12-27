@@ -2,13 +2,18 @@
 /* eslint-disable react/function-component-definition */
 import React, {useContext} from 'react';
 import GlobalContext from '../../../Contexts/index.jsx';
+import DescriptionText from './DescriptionText.jsx';
+import DescriptionCheckbox from './DescriptionCheckboxes.jsx'
 
 const ProductDescriptionParent = () => {
 
 const {currentItem} = useContext(GlobalContext);
-console.log(currentItem);
+
   return (
-    <div>{currentItem.id}</div>
+    <div className="productDescriptionParent">
+    <DescriptionText />
+    <DescriptionCheckbox />
+    </div>
   );
 };
 

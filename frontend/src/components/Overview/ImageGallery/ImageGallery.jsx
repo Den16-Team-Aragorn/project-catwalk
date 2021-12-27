@@ -5,7 +5,7 @@ import React from 'react';
 
 const ImageGallery = () => {
   return (
-    <div>
+    <div className="imageGalleryParent">
       Overview Parent
       <div className="slideshow-container">
         <div className="mySlides fade">
