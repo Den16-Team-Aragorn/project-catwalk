@@ -1,27 +1,43 @@
-/* eslint-disable import/extensions */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import GlobalContext from '../Contexts/index.jsx';
 import Header from './Header/Header.jsx';
 import OverviewParent from './Overview/OverviewParent.jsx';
 import Related from './RelatedItems/Related.jsx';
 import ReviewParent from './RatingsReviews/ReviewParent.jsx';
+import axios from 'axios';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
 
-    this.state = {};
-  }
+  const [currentItem, setCurrentItem] = useState({});
+  const [allProducts, setAllProducts] = useState([]);
 
-  render() {
-    return (
-      <div>
-        <Header />
-        <OverviewParent />
-        <Related />
-        <ReviewParent />
-      </div>
-    );
-  }
+  const fetchItemData = (productID) => {
+    axios.get(`/api/products/${productID}`).then((res) => {
+      setCurrentItem(res.data);
+    })
+  };
+
+  const fetchAllProducts = () => {
+    axios.get('/api/products?count=1011').then((res) => {
+      setAllProducts(res.data);
+    })
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+    fetchItemData(44389);
+  }, []);
+
+  return (
+  <div>
+    <GlobalContext.Provider value={ {currentItem, setCurrentItem, allProducts}}>
+      <Header />
+      <OverviewParent />
+      <Related />
+      <ReviewParent />
+    </GlobalContext.Provider>
+  </div>
+);
 }
 
 export default App;
