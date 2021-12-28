@@ -5,7 +5,7 @@ import React from 'react';
 
 const ImageGallery = () => {
   return (
-    <div>
+    <div className="imageGalleryParent">
       Overview Parent
       <div className="slideshow-container">
         <div className="mySlides fade">
@@ -26,8 +26,8 @@ const ImageGallery = () => {
           <div className="text">Caption Three</div>
         </div>
 
-        <button type="button" className="prev" onClick="plusSlides(-1)">&#10094;</button>
-        <button type="button" className="next" onClick="plusSlides(1)">&#10095;</button>
+        {/* <button type="button" className="prev" onClick="plusSlides(-1)">&#10094;</button> */}
+        {/* <button type="button" className="next" onClick="plusSlides(1)">&#10095;</button> */}
       </div>
     </div>
 

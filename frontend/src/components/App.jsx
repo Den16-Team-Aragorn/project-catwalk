@@ -25,7 +25,7 @@ const App = () => {
 
   useEffect(() => {
     fetchAllProducts();
-    fetchItemData(44389);
+    fetchItemData(44390);
   }, []);
 
   return (

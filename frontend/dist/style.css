@@ -20,7 +20,60 @@
   width: 70vw;
   background-color: hotpink;
   margin: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
+
+.imageGalleryParent {
+  background-color: aquamarine;
+  flex: auto;
+  width: 40vw;
+  height: 70vh;
+  order: 1;
+}
+.productInformationParent {
+  background-color: yellow;
+  width: 30vw;
+  height:70vh;
+  order: 2;
+  flex-direction: column;
+}
+.productDescriptionParent {
+  background-color: powderblue;
+  display: flex;
+  flex: auto;
+  order: 3;
+  width: 70vw;
+  height: 30vh;
+
+  align-items: center;
+}
+
+.descriptionText {
+  width: 42vw;
+  text-align: left;
+}
+
+.checkBoxesText {
+  width: 18vw;
+  text-align: center;
+  border-left: solid grey;
+}
+
+.overviewMap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 20vw;
+}
+
+.overviewImages {
+  height: 5em;
+  width: 5em;
+  border-radius: 50%;
+}
+
 
 .related {
   height: 100vh;
