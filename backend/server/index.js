@@ -15,7 +15,7 @@ app.use(express.static(`${__dirname}/../../frontend/dist`));
 app.use(express.json());
 
 app.use('/api/*', async (req, res) => {
-  console.log(API_KEY);
+  // console.log(API_KEY);
   const payload = await axios({
     method: req.method.toLowerCase(),
     url: URL + req.originalUrl.slice(4),
