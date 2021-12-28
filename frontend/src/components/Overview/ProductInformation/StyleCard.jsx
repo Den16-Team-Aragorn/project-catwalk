@@ -5,7 +5,6 @@ import axios from 'axios';
 const StyleCard = (props) => {
   const {currentItem} = useContext(GlobalContext);
   let url = props.item.photos[0].thumbnail_url || 'not working';
-  console.log(props.item.photos[0]);
   return (
     <div>
       <img className='overviewImages' src={url} />

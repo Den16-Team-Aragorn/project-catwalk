@@ -24,7 +24,7 @@ const OverviewStyle = () => {
       <p>STYLE > {currentItem.id === undefined ? 'Loading...' : item}</p>
       <div className="overviewMap">
         {styleId.map((element) => (
-          <StyleCard item={element} />
+          <StyleCard key={element.style_id} item={element} />
         ))}
       </div>
     </div>
