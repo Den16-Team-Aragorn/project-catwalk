@@ -33,7 +33,7 @@ const RelatedCard = (props) => {
     return (
       <div>oops</div>
     )
-    console.log('oops')
+ //console.log('oops')
     } else {
       return (
         <div style={{ height: 50, display: 'flex', justifyContent: 'space-around', flexdirection: 'row', alignitems: 'center' }}>
