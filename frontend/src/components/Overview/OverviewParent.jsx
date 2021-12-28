@@ -10,12 +10,9 @@ const OverviewParent = () => {
   return (
     <div>
       <div className="overviewParent">
-        Overview
-        <div className="Image/Information">
           <ImageGallery />
           <ProductInformationParent />
-        </div>
-        <ProductDescriptionParent />
+          <ProductDescriptionParent />
       </div>
     </div>
   );
