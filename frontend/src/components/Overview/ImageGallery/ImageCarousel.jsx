@@ -1,10 +1,29 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
-import React from 'react';
+import React, {useContext, useState, useEffect} from 'react';
+import GlobalContext from '../../../Contexts/index.jsx'
+import axios from 'axios';
 
 const ImageCarousel = () => {
+  const { currentItem } = useContext(GlobalContext);
+  const [styles, setStyles] = useState(null);
+
+
+  useEffect(() => {
+    axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
+      setStyles(res.data.results);
+    })
+  }, [currentItem]);
+
+
+  if(styles == null) {
+    return (<div>'Loading Carousel...'</div>)
+  }
+
   return (
-    <div>Carousel</div>
+    <div>
+      <img className="image-carousel" src={styles[0].photos[0].url}/>
+    </div>
   );
 };
 

@@ -4,13 +4,10 @@ import axios from 'axios';
 import StyleCard from './StyleCard.jsx';
 
 const OverviewStyle = () => {
-  const {currentItem} = useContext(GlobalContext);
+  const {currentItem, setCurrentItem} = useContext(GlobalContext);
   const [item, setItem] = useState('');
   const [styleId, setStyleId] = useState([]);
 
-  const getCurrentStyle = (productID) => {
-
-  };
 
   useEffect(() => {
     axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
@@ -18,6 +15,8 @@ const OverviewStyle = () => {
       setStyleId(res.data.results);
     })
   }, [currentItem]);
+
+
 
   return (
     <div>

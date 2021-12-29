@@ -4,11 +4,11 @@ import axios from 'axios';
 
 const StyleCard = (props) => {
   const {currentItem} = useContext(GlobalContext);
-  let url = props.item.photos[0].thumbnail_url || 'not working';
+
   return (
-    <div>
-      <img className='overviewImages' src={url} />
-    </div>
+
+      <img className='overviewImages' src={props.item.photos[0].url}/>
+
   );
 };
 
