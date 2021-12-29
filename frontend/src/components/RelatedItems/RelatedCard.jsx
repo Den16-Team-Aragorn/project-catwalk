@@ -13,14 +13,16 @@ const RelatedCard = (props) => {
   const fetchRelatedItem = (productID) => {
     axios.get(`/api/products/${productID}`).then((res) => {
       setCurrent(res.data);
+    }).catch( (err) => {
+      console.log('error in relatedItemsCarousel')
     })
   };
 
   const fetchRelatedItemStyle = (productID) => {
     axios.get(`/api/products/${productID}/styles`).then((res) => {
       setCurrentStyle(res.data);
-      //console.log(res.data)
-
+    }).catch( (err) => {
+      console.log('error in relatedItemsCarousel')
     })
   };
   useEffect(() => {
