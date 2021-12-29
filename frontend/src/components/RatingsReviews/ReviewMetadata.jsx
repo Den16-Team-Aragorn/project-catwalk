@@ -20,6 +20,16 @@ const ReviewMetadata = () => {
     characteristics} = useContext(ReviewContext);
 
 
+  // click event handler for star ratings
+  const starRatingClickEventHandler = (event) => {
+    let stars = event.target.id.slice(0,1);
+    console.log(stars);
+    // this will need to be completed, need to filter current reviews by star rating
+    // also needs to work if multiple stars are selected
+    // also should make visible a button beneath ratings to reset (turn off) all currently selected stars
+  };
+
+
 
 
   return (
@@ -35,19 +45,29 @@ const ReviewMetadata = () => {
       </div>
 
       <div>
-        5 stars -- {fiveStarRatings}
+        <span id="5star" onClick={() => { starRatingClickEventHandler(event) }}>5 stars</span>
+        <span> -- {fiveStarRatings}</span>
+
       </div>
       <div>
-        4 stars -- {fourStarRatings}
+        <span id="4star" onClick={() => { starRatingClickEventHandler(event) }}>4 stars</span>
+        <span> -- {fourStarRatings}</span>
+
       </div>
       <div>
-        3 stars -- {threeStarRatings}
+        <span id="3star" onClick={() => { starRatingClickEventHandler(event) }}>3 stars</span>
+        <span> -- {threeStarRatings}</span>
+
       </div>
       <div>
-        2 stars -- {twoStarRatings}
+        <span id="2star" onClick={() => { starRatingClickEventHandler(event) }}>2 stars</span>
+        <span> -- {twoStarRatings}</span>
+
       </div>
       <div>
-        1 stars -- {oneStarRatings}
+        <span id="1star" onClick={() => { starRatingClickEventHandler(event) }}>1 stars</span>
+        <span> -- {oneStarRatings}</span>
+
       </div>
 
       <ReviewCharacteristics characteristics={characteristics} />
