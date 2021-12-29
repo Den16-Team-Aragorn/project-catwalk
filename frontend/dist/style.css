@@ -75,14 +75,6 @@
 }
 
 
-.related {
-  height: 100vh;
-  width: 70vw;
-  background-color: greenyellow;
-  margin: auto;
-  display: flex;
-}
-
 /*
 // ================================================
 // Reviews
@@ -143,3 +135,83 @@
 .ReviewListButtons {
   display: flex;
 }
+
+/*
+// ================================================
+// Related Items
+// ================================================
+*/
+
+.related {
+  height: 100vh;
+  width: 70vw;
+  background-color: greenyellow;
+  margin: auto;
+  display: flex;
+}
+
+.outfitSlider {
+  position: relative;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.relatedSlider {
+  position: relative;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carouselImage {
+  width: 250px;
+  height: 300px;
+  border-radius: 5px;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  font-size: 3rem;
+  color: black;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  font-size: 3rem;
+  color: black;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.outfitSlide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.outfitSlideActive {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
+
+.relatedSlide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.relatedSlideActive {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
+
