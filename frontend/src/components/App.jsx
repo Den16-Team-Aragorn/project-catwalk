@@ -14,12 +14,16 @@ const App = () => {
   const fetchItemData = (productID) => {
     axios.get(`/api/products/${productID}`).then((res) => {
       setCurrentItem(res.data);
+    }).catch((err) => {
+      console.log('error in App.jsx fetchItemData');
     })
   };
 
   const fetchAllProducts = () => {
     axios.get('/api/products?count=1011').then((res) => {
       setAllProducts(res.data);
+    }).catch((err) => {
+      console.log('error in App.jsx fetchAllProducts');
     })
   };
 
