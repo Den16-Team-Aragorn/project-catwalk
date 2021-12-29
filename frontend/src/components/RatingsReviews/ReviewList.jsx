@@ -1,24 +1,23 @@
 import React, {useContext} from 'react';
-import ReviewContext from '../../Contexts/reviewContext.jsx';
 import ReviewTile from './ReviewTile.jsx';
+import ReviewContext from '../../Contexts/reviewContext.jsx';
 
 
 const ReviewList = () => {
 
-  const {totalReviews} = useContext(ReviewContext);
-
+  const {visibleReviewsCounter, visibleReviews} = useContext(ReviewContext);
 
 
 
 
   return (
     <div className="reviewList">
-      {totalReviews} reviews, sorted by __relevance__
 
-      <ReviewTile />
+      {visibleReviews.map( review => (
+        <ReviewTile review={review} key={review.review_id} />
+      ))}
+
     </div>
-
-
   );
 };
 
