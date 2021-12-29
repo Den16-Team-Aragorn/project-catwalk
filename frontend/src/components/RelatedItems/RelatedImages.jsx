@@ -1,9 +1,7 @@
-import React, {useState, useContext, useEffect} from 'react';
-import GlobalContext from '../../Contexts/index.jsx';
-import RelatedContext from './RelatedContext.jsx'
-
-
 export const RelatedImages = [
+  {
+    image: 'https://previews.123rf.com/images/maestriadiz/maestriadiz1203/maestriadiz120300001/12912916-maniqu%C3%ADes-en-una-posici%C3%B3n-diferente-sobre-un-fondo-blanco.jpg'
+  },
   {
     image: 'https://i.guim.co.uk/img/media/dde962c0af6e8694bdba9d11877d572a7db01bf8/0_0_3504_2103/master/3504.jpg?width=700&quality=85&auto=format&fit=max&s=39c0104016f71fc7eb6bb82e85e9923b'
   },

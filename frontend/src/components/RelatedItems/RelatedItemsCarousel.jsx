@@ -5,13 +5,32 @@ import axios from 'axios';
 import { RelatedImages } from './RelatedImages.jsx'
 import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa';
 
+
+
 const RelatedItemsCarousel = ({ slides }) => {
   const [relatedData, setRelatedData] = useState([])
   const [otherItems, setOtherItems] = useState(0)
   const {currentItem} = useContext(GlobalContext);
-  const {relatedItems} = useContext(RelatedContext);
-  const {setRelatedItems} = useContext(RelatedContext);
-  const length = slides.length
+  const {setCurrentItem} = useContext(GlobalContext);
+  var length = 3;
+  if (relatedData.length <= 1) {
+    length = 3;
+  } else {
+    length = relatedData.length;
+  }
+
+  const relatedSetter = (slide) => {
+    fetchItemData(slide.product_id);
+  }
+
+  const fetchItemData = (productID) => {
+    axios.get(`/api/products/${productID}`).then((res) => {
+      setCurrentItem(res.data);
+    }).catch( (err) => {
+      console.log('error in relatedItemsCarousel')
+    })
+
+  };
 
   const comboFetch = (productID) => {
     const relatedObjects = [];
@@ -20,35 +39,19 @@ const RelatedItemsCarousel = ({ slides }) => {
       relatedArray.map((item, index) => {
         axios.get(`/api/products/${item}/styles`).then((res) => {
           relatedObjects.push(res.data);
-        })
-      })
-    })
-  }
-
-  const fetchRelated = (productID) => {
-    axios.get(`/api/products/${productID}/related`).then((res) => {
-      setRelatedItems(res.data);
-    })
-  };
-
-  const fetchRelatedstyles = (state) => {
-    const dataArray = [];
-    state.map((productID, index) => {
-    axios.get(`/api/products/${productID}/styles`).then((res) => {
-      dataArray.push(res.data);
+          setRelatedData(relatedObjects);
+        }).catch( (err) => {
+          console.log('error in relatedItemsCarousel')
+        });
+      });
+    }).catch( (err) => {
+      console.log('error in relatedItemsCarousel')
     });
-  });
-    setRelatedData(dataArray);
-    //console.log(relatedData)
   }
 
   useEffect(() => {
-      fetchRelated(currentItem.id);
-  }, [otherItems]);
-
-  useEffect(() => {
-    fetchRelatedstyles(relatedItems)
-  }, [relatedItems])
+      comboFetch(currentItem.id);
+  }, [currentItem]);
 
   const nextSlide = () => {
     setOtherItems(otherItems === length - 1 ? 0 : otherItems + 1)
@@ -62,35 +65,49 @@ const RelatedItemsCarousel = ({ slides }) => {
     return null;
   }
 
+  if (relatedData[0] === undefined) {
+    return (
+      <div>LOADING</div>
+    )
+  } else {
+
   return (
-    <section className="relatedSlider">
+    <section className="relatedSlider" >
       <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide}/>
       <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide}/>
-      {RelatedImages.map((slide, index) => {
+      {relatedData.map((slide, index) => {
          return (
-           <div className={index === otherItems ? 'relatedSlideActive' : 'relatedSlide'} key={index}>
-             {index === otherItems && (<img src={slide.image} alt="loading image"
+           <div className={index === otherItems ? 'relatedSlideActive' : 'relatedSlide'} key={index}  >
+             {index === otherItems && (<img onClick={() => relatedSetter(slide)}  src={slide.results[0].photos[0].thumbnail_url} alt="loading image"
               className="carouselImage" />
               )}
            </div>
-         )
-      })}
+         )})};
     </section>
-
-    // <div>related items carousel
-    //   <div>items related to : {currentItem.name} </div>
-    //   <div>
-    //     {relatedItems.map((item, index) => {
-
-    //       return (
-    //           <RelatedCard key={index} item={item}/>
-    //       )
-    //     })}
-    //   </div>
-
-    // </div>
-  );
-
+  );}
 };
 
 export default RelatedItemsCarousel;
+
+
+
+
+//may need later
+
+
+
+// const fetchRelated = (productID) => {
+//   axios.get(`/api/products/${productID}/related`).then((res) => {
+//     setRelatedItems(res.data);
+//   })
+// };
+
+// const fetchRelatedstyles = (state) => {
+//   const dataArray = [];
+//   state.map((productID, index) => {
+//   axios.get(`/api/products/${productID}/styles`).then((res) => {
+//     dataArray.push(res.data);
+//   });
+// });
+//   setRelatedData(dataArray);
+// }
