@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import ReviewContext from '../../Contexts/reviewContext.jsx';
 
 
 const ReviewListButtons = () => {
@@ -7,13 +8,20 @@ const ReviewListButtons = () => {
   // if no reviews or if all reviews currently displayed, then more reviews button not rendered
   // add review always visible
 
+  const {totalReviews, visibleReviewsCounter, setVisibleReviewsCounter} = useContext(ReviewContext);
+
+  // click event handler for more reviews button
+  const moreReviewsClickHandler = () => {
+    setVisibleReviewsCounter(visibleReviewsCounter + 2);
+  };
+
 
 
 
 
   return (
     <div className="ReviewListButtons">
-      <button>MORE REVIEWS</button>
+      <button onClick={ () => { moreReviewsClickHandler() }}>MORE REVIEWS</button>
       <button>ADD A REVIEW +</button>
 
     </div>
