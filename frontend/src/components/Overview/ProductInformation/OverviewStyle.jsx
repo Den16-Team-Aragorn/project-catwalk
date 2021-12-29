@@ -13,6 +13,8 @@ const OverviewStyle = () => {
     axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
       setItem(res.data.results[0].name)
       setStyleId(res.data.results);
+    }).catch((err) => {
+      console.log('error in overviewstyle');
     })
   }, [currentItem]);
 

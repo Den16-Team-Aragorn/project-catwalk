@@ -39,21 +39,40 @@
   height: 70vh;
 
 }
-.image-carousel {
-  object-fit: scale-down;
-  height: 100%;
-  width: 100%;
-  display: flex;
+
+.overview-slideshow-container {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 100%;
+  height: 600px;
 }
 
-.slide-arrow-right {
-  width:10px;
+.overview-slideshow-imageContainer {
+  width: 100%;
+  height: 100%;
+  background-position: top left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: background-image 0.2s ease-in-out;
+}
+
+.overview-slideshow-controls {
+  position: relative;
+  height: 80%;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
 }
-.slide-arrow-left {
-  position: absolute;
-  width:10px;
+
+.overview-slideshow-controls__button {
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  padding: 15px;
+  margin: 0 10px;
+  cursor: pointer;
 }
+
 .productInformationParent {
   background-color: yellow;
   width: 30vw;
