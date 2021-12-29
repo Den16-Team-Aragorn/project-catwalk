@@ -8,6 +8,8 @@ import axios from 'axios';
 
 const ReviewParent = () => {
 
+  // console.log('rendering reviewParent...');
+
   // get current App item from global context
   const {currentItem} = useContext(GlobalContext);
 
@@ -56,15 +58,27 @@ const ReviewParent = () => {
         let totalRev = oneStar + twoStar + threeStar + fourStar + fiveStar;
         setTotalReviews(totalRev);
         setAvgRating( (totalStars / totalRev).toFixed(1) );
+      })
+      .catch( (err) => {
+        console.log('error occurred in fetchReviewMetadata..');
       });
   };
 
   // function retrieves reviews for currentItem and updates state
   const fetchProductReviews = () => {
+
+    // console.log('made it to fetchProductReviews function...');
+
     axios
       .get(`/api/reviews?product_id=${currentItem.id}&sort=${sortOn}&count=${visibleReviewsCounter}`)
       .then( ({data}) => {
+
+        // console.log('made it to fetchProductReviews axios.then')
+
         setVisibleReviews(data.results);
+      })
+      .catch( (err) => {
+        console.log('error occurred in fetchProductReviews');
       });
   };
 
@@ -76,8 +90,11 @@ const ReviewParent = () => {
 
   // any change in sortOn, visibleReviewCount, or ________ should trigger a new fetch request for reviews
   useEffect( () => {
-    // do stuff here
-    // console.log('change detected in sortOn or visibleReviewCounter');
+
+    // console.log('change detected in visibleReviewsCounter');
+    if (visibleReviewsCounter < totalReviews) {
+      fetchProductReviews();
+    }
   }, [sortOn, visibleReviewsCounter]);
 
 
@@ -103,7 +120,7 @@ const ReviewParent = () => {
           fourStarRatings,
           fiveStarRatings,
           characteristics,
-          visibleReviewsCounter,
+          visibleReviewsCounter, setVisibleReviewsCounter,
           visibleReviews,
           sortOn
         } }>
