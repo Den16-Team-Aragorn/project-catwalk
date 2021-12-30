@@ -4,11 +4,11 @@ const SelectSize = () => {
 
 return (
   <div>
-    <select name="selectList" id="selectList">
+    <select name="selectList" className="selectList">
       <option value="option 1">Select Size</option>
       <option value="option 2">Option 2</option>
     </select>
-    <select name="selectList" id="selectList">
+    <select name="selectList" className="selectList">
       <option value="option 1">Quantity</option>
       <option value="option 2">Option 2</option>
     </select>

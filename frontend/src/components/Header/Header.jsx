@@ -5,10 +5,14 @@ import React from 'react';
 const Header = () => {
   return (
     <div className="header">
-      <div className="logo">Logo</div>
+        <img className="logo" src="./narsil_edit_2.png" />
+        <h1 className="bilbosbaubles">Bilbo's Baubles</h1>
       <div className="search">Search</div>
     </div>
   );
 };
 
+
+
 export default Header;
+

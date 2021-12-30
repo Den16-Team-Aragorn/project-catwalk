@@ -1,18 +1,38 @@
+/*  Color Pallette
+
+    #687864 - green
+    #31708E - dark blue
+    #5085A5 - grey blue
+    #8FC1E3 - light blue
+    #F7F9FB - white
+*/
+/* Slogan - We do not stop until nightfall! */
+
 .header {
-  background-color: grey;
-  width: 70vw;
-  margin: auto;
+  background-color: #5085A5;
+  width: 77vw;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   height: 10vh;
 }
-
 .logo {
-  padding-left: 5%;
+  background-color: black;
+}
+
+.bilbosbaubles {
+  text-align: center;
+  font-family: fantasy;
+  color:#F7F9FB;
 }
 
 .search {
   padding-right: 5%;
+}
+
+body {
+  background-color: #F7F9FB;
+  margin: 0;
 }
 
 /*
@@ -23,7 +43,7 @@
 
 .overviewParent {
   height: 100vh;
-  width: 70vw;
+  width: 77vw;
   background-color: hotpink;
   margin: auto;
   display: flex;
@@ -32,7 +52,7 @@
 }
 
 .imageGalleryParent {
-  background-color: aquamarine;
+  background-color: #8FC1E3 ;
   flex: auto;
   flex-direction: row;
   width: 40vw;
@@ -73,22 +93,32 @@
   cursor: pointer;
 }
 
+.overview-expand-button {
+  color: white;
+  float: right;
+
+}
+
 .productInformationParent {
-  background-color: yellow;
+  background-color: #8FC1E3;
   width: 30vw;
   height:70vh;
   order: 2;
   flex-direction: column;
   flex: auto;
+
 }
 
 .dropdown-container {
   display: flex;
   flex-direction: column;
+  margin-left: 15px;
+  margin-top: 3vh;
 }
 
+
 .productDescriptionParent {
-  background-color: powderblue;
+  background-color: #687864 ;
   display: flex;
   flex: auto;
   order: 3;
@@ -98,22 +128,24 @@
 }
 
 .descriptionText {
-  width: 42vw;
+  width: 48vw;
   text-align: left;
 }
 
 .checkBoxesText {
-  width: 18vw;
   text-align: center;
   border-left: solid grey;
+
 }
 
 .overviewMap {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  max-width: 20vw;
-
+  width: 400px;
+  flex-flow: row wrap;
+  margin-left: 15px;
+  margin-top: 3vh;
 }
 
 .overviewImages {
@@ -124,9 +156,20 @@
   margin-right: 1%;
   margin-bottom: 1%;
   border-radius: 50%;
-  flex-basis:22%
+  flex-basis:22%;
+  border: 2px solid black;
 }
 
+.overviewtitle {
+  margin-left: 15px;
+}
+
+.overviewReviews {
+  margin-left: 15px;
+}
+.style-- {
+  margin-left: 15px;
+}
 
 /*
 // ================================================

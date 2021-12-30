@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaChevronCircleLeft, FaChevronCircleRight} from "react-icons/fa";
+import {FaChevronCircleLeft, FaChevronCircleRight, FaExpand} from "react-icons/fa";
 
 
   class Slideshow extends React.Component {
@@ -24,12 +24,13 @@ import {FaChevronCircleLeft, FaChevronCircleRight} from "react-icons/fa";
       const { images } = this.props;
       return(
         <div className="overview-slideshow-container">
+          <FaExpand className="overview-expand-button"/>
           <div
             className="overview-slideshow-imageContainer"
             style={{
               backgroundImage: `url(${images[current]})`
-            }}
-          >
+            }}>
+
             <div className="overview-slideshow-controls">
               <button className="overview-slideshow-controls__button" onClick={this.goBack}>
                 <FaChevronCircleLeft />

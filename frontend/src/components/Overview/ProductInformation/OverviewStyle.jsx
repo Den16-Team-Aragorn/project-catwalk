@@ -1,10 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import GlobalContext from '../../../Contexts/index.jsx';
+import OverviewContext from '../../../Contexts/OverviewContext.jsx';
 import axios from 'axios';
 import StyleCard from './StyleCard.jsx';
 
 const OverviewStyle = () => {
   const {currentItem, setCurrentItem} = useContext(GlobalContext);
+  const {styles, setStyles, setStyle} = useContext(GlobalContext);
   const [item, setItem] = useState('');
   const [styleId, setStyleId] = useState([]);
 
@@ -22,7 +24,7 @@ const OverviewStyle = () => {
 
   return (
     <div>
-      <p>STYLE > {currentItem.id === undefined ? 'Loading...' : item}</p>
+      <p className='style--'>STYLE > {currentItem.id === undefined ? 'Loading...' : item}</p>
       <div className="overviewMap">
         {styleId.map((element) => (
           <StyleCard key={element.style_id} item={element} />
