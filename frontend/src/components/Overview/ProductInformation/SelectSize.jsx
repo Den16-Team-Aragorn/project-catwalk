@@ -6,8 +6,8 @@ const SelectSize = () => {
 
   const {currentItem} = useContext(GlobalContext);
   const {allStyles, styles} = useContext(OverviewContext);
-  console.log('allstyles :' + allStyles);
-  console.log('styles :' + styles);
+  // console.log('allstyles :' + allStyles);
+  // console.log('styles :' + styles);
 
 return (
   <div>
