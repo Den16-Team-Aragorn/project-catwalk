@@ -10,7 +10,7 @@ const AddToCart = () => {
       </select>
       <label className="overview-favorite">
           <input className="overview-checkbox" type="checkbox" />
-          <FaStar />
+          <FaRegStar />
        </label>
 
     </div>

@@ -1,6 +1,13 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
+import GlobalContext from '../../../Contexts/index.jsx';
+import OverviewContext from '../../../Contexts/OverviewContext.jsx';
 
 const SelectSize = () => {
+
+  const {currentItem} = useContext(GlobalContext);
+  const {allStyles, styles} = useContext(OverviewContext);
+  console.log('allstyles :' + allStyles);
+  console.log('styles :' + styles);
 
 return (
   <div>
