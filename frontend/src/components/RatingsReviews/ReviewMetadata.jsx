@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import ReviewContext from '../../Contexts/reviewContext.jsx';
 import ReviewCharacteristics from './ReviewCharacteristics.jsx';
 import axios from 'axios';
+import Stars from 'react-star-ratings';
 
 
 const ReviewMetadata = () => {
@@ -35,9 +36,12 @@ const ReviewMetadata = () => {
   return (
     <div className="reviewMetadata">
 
-      <div>
-        <span className="avgRating">{avgRating}</span>
-        <span className="avgRatingStars">****</span>
+      <div className="reviewMetadataHeader">
+        <div className="avgRating">{avgRating}</div>
+        <div className="avgRatingStars">
+          <Stars rating={avgRating} starRatedColor={"black"} numberOfStars={5} starDimension={"2vh"} starSpacing={"0vh"} />
+        </div>
+
       </div>
 
       <div>

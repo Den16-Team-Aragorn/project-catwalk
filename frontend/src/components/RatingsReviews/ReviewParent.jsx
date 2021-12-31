@@ -8,7 +8,7 @@ import axios from 'axios';
 
 const ReviewParent = () => {
 
-  // console.log('rendering reviewParent...');
+  // console.log('reviewParent rendering...');
 
   // get current App item from global context
   const {currentItem} = useContext(GlobalContext);
@@ -26,12 +26,13 @@ const ReviewParent = () => {
   const [fiveStarRatings, setFiveStarRatings] = useState(0);
   const [characteristics, setCharacteristics] = useState({});
 
+  const [allReviews, setAllReviews] = useState([]);
   const [visibleReviewsCounter, setVisibleReviewsCounter] = useState(2);
   const [visibleReviews, setVisibleReviews] = useState([]);
-  const [sortOn, setSortOn] = useState('relevance');
+  const [sortOn, setSortOn] = useState('relevant');
 
-  // function retrieves review meta info for currentItem and updates state
-  const fetchReviewMetadata = () => {
+  // function retrieves review meta info for currentItem, then retrieves reviews
+  const fetchReviewMetadataAndReviews = () => {
     axios
       .get(`/api/reviews/meta?product_id=${currentItem.id}`)
       .then( ({data}) => {
@@ -47,7 +48,13 @@ const ReviewParent = () => {
 
         let rec = Number(data.recommended.true) || 0;
         let notRec = Number(data.recommended.false) || 0;
-        setPercentRecommend( ((rec / (rec + notRec)) * 100).toFixed(0) );
+        if (notRec === 0 && rec > 0) {
+          setPercentRecommend(100);
+        } else if (notRec === 0) {
+          setPercentRecommend(0);
+        } else {
+          setPercentRecommend( Number(((rec / (rec + notRec)) * 100).toFixed(0)) );
+        }
 
         let oneStar = Number(data.ratings[1]) || 0;
         let twoStar = Number(data.ratings[2]) || 0;
@@ -57,45 +64,58 @@ const ReviewParent = () => {
         let totalStars = oneStar + twoStar*2 + threeStar*3 + fourStar*4 + fiveStar*5;
         let totalRev = oneStar + twoStar + threeStar + fourStar + fiveStar;
         setTotalReviews(totalRev);
-        setAvgRating( (totalStars / totalRev).toFixed(1) );
+
+        if (totalRev === 0) {
+          setAvgRating(0);
+        } else {
+          setAvgRating( Number((totalStars / totalRev).toFixed(1)) );
+        }
+
+      })
+      .then( () => {
+        fetchProductReviews();
       })
       .catch( (err) => {
         console.log('error occurred in fetchReviewMetadata..');
       });
   };
 
-  // function retrieves reviews for currentItem and updates state
+  // function retrieves all reviews for currentItem
   const fetchProductReviews = () => {
-
-    // console.log('made it to fetchProductReviews function...');
-
     axios
-      .get(`/api/reviews?product_id=${currentItem.id}&sort=${sortOn}&count=${visibleReviewsCounter}`)
+      .get(`/api/reviews?product_id=${currentItem.id}&sort=${sortOn}&count=1000`)
       .then( ({data}) => {
-
-        // console.log('made it to fetchProductReviews axios.then')
-
-        setVisibleReviews(data.results);
+        setAllReviews(data.results);
       })
       .catch( (err) => {
         console.log('error occurred in fetchProductReviews');
       });
   };
 
-  // any change in currentItem should trigger a new fetch request for meta info and reviews ***THIS SHOULD ALSO TRIGGER RESET OF SORT, FILTER, VISIBLE, ETC.
+  // any change in currentItem should reset review and sort info and trigger a new fetch request for meta info and reviews
   useEffect( () => {
-    fetchReviewMetadata();
-    fetchProductReviews();
+    // setVisibleReviews([]);
+    setVisibleReviewsCounter(2);
+    fetchReviewMetadataAndReviews();
   }, [currentItem]);
 
-  // any change in sortOn, visibleReviewCount, or ________ should trigger a new fetch request for reviews
+  // any change in allReviews (current product change or new sort) should reset visible reviews and counter
   useEffect( () => {
+    setVisibleReviews(allReviews.slice(0, 2));
+    // setVisibleReviewsCounter(2);
+  }, [allReviews]);
 
-    // console.log('change detected in visibleReviewsCounter');
-    if (visibleReviewsCounter < totalReviews) {
-      fetchProductReviews();
+  // any change in visibleReviewsCounter should update visible reviews (if statement reduces redundant renders)
+  useEffect( () => {
+    if (visibleReviewsCounter > 2) {
+      setVisibleReviews(allReviews.slice(0, visibleReviewsCounter));
     }
-  }, [sortOn, visibleReviewsCounter]);
+  }, [visibleReviewsCounter]);
+
+  // any change in sortOn should trigger a new fetch request for reviews
+  useEffect( () => {
+    fetchProductReviews();
+  }, [sortOn]);
 
 
   // render our components once review metadata has been fetched
