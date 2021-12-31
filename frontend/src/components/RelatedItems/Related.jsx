@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import RelatedItemsCarousel from './RelatedItemsCarousel.jsx'
 import OutfitCarousel from './OutfitCarousel.jsx'
 import RelatedContext from './RelatedContext.jsx'
-import { OutfitData } from './OutfitData.jsx'
-import { RelatedImages } from './RelatedImages.jsx'
+import { OutfitData1 } from './OutfitData.jsx'
+
 
 const Related = () => {
   const [relatedItems, setRelatedItems] = useState([]);
@@ -11,8 +11,8 @@ const Related = () => {
     <div className="related">Related
       <div className="relateditemscarousel">
         <RelatedContext.Provider value={{relatedItems, setRelatedItems}}>
-          <RelatedItemsCarousel slides={RelatedImages}/>
-          <OutfitCarousel slides={OutfitData} />
+          <RelatedItemsCarousel />
+          <OutfitCarousel slides={OutfitData1} />
         </RelatedContext.Provider>
       </div>
     </div>
