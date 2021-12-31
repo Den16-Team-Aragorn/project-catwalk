@@ -4,6 +4,7 @@
 import React from 'react';
 import {useContext, useState, useEffect} from 'react';
 import GlobalContext from '../../../Contexts/index.jsx'
+import OverviewContext from '../../../Contexts/OverviewContext.jsx'
 import axios from 'axios';
 import ImageCarousel from './ImageCarousel.jsx';
 import Slideshow from './Slideshow.jsx';
@@ -23,26 +24,18 @@ const dummyimages = [
 
 const ImageGallery = () => {
 
-  const { currentItem } = useContext(GlobalContext);
-  const [styles, setStyles] = useState(null);
-
+  const { currentItem, setCurrentItem } = useContext(GlobalContext);
+  const {styles, setStyles, setStyle} = useContext(OverviewContext);
 
   useEffect(() => {
-    axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
-      setStyles(res.data.results);
-    }).catch((err) => {
-      console.log('error in imagegallery');
-    })
+
+    setStyle();
 
   }, [currentItem]);
 
-
-
-
-
   return (
     <div className="imageGalleryParent">
-      <Slideshow images={dummyimages}/>
+      <Slideshow images={styles === [] ? dummyimages : styles}/>
     </div>
 
   );
