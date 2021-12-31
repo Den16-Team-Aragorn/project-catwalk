@@ -156,6 +156,16 @@
   background-color: seagreen;
 }
 
+.reviewMetadataHeader {
+  display: flex;
+  height: 5vh;
+}
+
+.avgRating {
+  font-size: 4.5vh;
+  font-weight: bold;
+}
+
 /* ReviewListContainer */
 .reviewListContainer {
   width: 75%;
