@@ -2,12 +2,11 @@ import React, {useState, useContext, useEffect} from 'react';
 import GlobalContext from '../../Contexts/index.jsx';
 import RelatedContext from './RelatedContext.jsx'
 import axios from 'axios';
-import { RelatedImages } from './RelatedImages.jsx'
 import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa';
 
 
 
-const RelatedItemsCarousel = ({ slides }) => {
+const RelatedItemsCarousel = () => {
   const [relatedData, setRelatedData] = useState([])
   const [otherItems, setOtherItems] = useState(0)
   const {currentItem} = useContext(GlobalContext);
@@ -61,10 +60,6 @@ const RelatedItemsCarousel = ({ slides }) => {
     setOtherItems(otherItems === 0 ? length - 1 : otherItems - 1)
   };
 
-  if(!Array.isArray(slides) || slides.length <= 0) {
-    return null;
-  }
-
   if (relatedData[0] === undefined) {
     return (
       <div>LOADING</div>
@@ -82,7 +77,7 @@ const RelatedItemsCarousel = ({ slides }) => {
               className="carouselImage" />
               )}
            </div>
-         )})};
+         )})}
     </section>
   );}
 };

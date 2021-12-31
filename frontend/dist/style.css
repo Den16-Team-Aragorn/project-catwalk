@@ -201,6 +201,8 @@
   background-color: greenyellow;
   margin: auto;
   display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .outfitSlider {
@@ -213,12 +215,14 @@
 .relatedSlider {
   position: relative;
   height: 50vh;
+  width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .carouselImage {
+  position: relative;
   width: 250px;
   height: 300px;
   border-radius: 5px;
