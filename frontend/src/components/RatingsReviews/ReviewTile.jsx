@@ -1,8 +1,9 @@
 import React from 'react';
+import {DateTime} from 'luxon';
+import Stars from 'react-star-ratings';
 
 
 const ReviewTile = (props) => {
-
 
   // create element that will render if reviewer recommended the product
   let recommend;
@@ -26,10 +27,12 @@ const ReviewTile = (props) => {
     <div className="reviewTile">
 
       <div className="reviewTileHeader">
-        <div>Star rating: {props.review.rating}</div>
+        <div>
+          <Stars rating={props.review.rating} starRatedColor={"black"} numberOfStars={5} starDimension={"2vh"} starSpacing={"0vh"} />
+        </div>
         <div>
           <span>{props.review.reviewer_name}, </span>
-          <span>{props.review.date.slice(0,10)}</span>
+          <span>{DateTime.fromISO(props.review.date).toFormat('MMMM dd, yyyy')}</span>
         </div>
       </div>
 

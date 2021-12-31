@@ -23,7 +23,7 @@ const ReviewSort = () => {
 
       {totalReviews} reviews, sorted by
       <select onChange={(event) => { onChangeSortEventHandler(event) }}>
-        <option value="relevance">relevance</option>
+        <option value="relevant">relevance</option>
         <option value="helpful">helpful</option>
         <option value="newest">newest</option>
       </select>
