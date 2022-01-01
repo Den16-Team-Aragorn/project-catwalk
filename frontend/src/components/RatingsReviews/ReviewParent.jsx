@@ -33,7 +33,8 @@ const ReviewParent = () => {
 
   // function retrieves review meta info for currentItem, then retrieves reviews
   const fetchReviewMetadataAndReviews = () => {
-    axios
+    if (currentItem.id !== undefined) {
+      axios
       .get(`/api/reviews/meta?product_id=${currentItem.id}`)
       .then( ({data}) => {
 
@@ -78,11 +79,13 @@ const ReviewParent = () => {
       .catch( (err) => {
         console.log('error occurred in fetchReviewMetadata..');
       });
+    }
   };
 
   // function retrieves all reviews for currentItem
   const fetchProductReviews = () => {
-    axios
+    if (currentItem.id !== undefined) {
+      axios
       .get(`/api/reviews?product_id=${currentItem.id}&sort=${sortOn}&count=1000`)
       .then( ({data}) => {
         setAllReviews(data.results);
@@ -90,19 +93,28 @@ const ReviewParent = () => {
       .catch( (err) => {
         console.log('error occurred in fetchProductReviews');
       });
+    }
   };
 
   // any change in currentItem should reset review and sort info and trigger a new fetch request for meta info and reviews
   useEffect( () => {
-    // setVisibleReviews([]);
     setVisibleReviewsCounter(2);
     fetchReviewMetadataAndReviews();
+
+    // *** BUG *** : 1. different sort is selected (example newest)
+    //               2. currentItem is changed
+    //               3. this triggers re-render via functions above
+    //               4. still need to reset sortOn (preferably without duplicate re-renders from both useEffects (currentItem & sortOn))
+    //               5. still need to reset <select> element to return to default value ('relevant')
+    //               6. or maybe ignore it for now and focus on more important stuff and fix later if you have time
+    //               7. maybe refactor one/both fetch functions to take an arg/args to specify sortOn parameter
+    // setSortOn('relevant');
   }, [currentItem]);
 
   // any change in allReviews (current product change or new sort) should reset visible reviews and counter
   useEffect( () => {
     setVisibleReviews(allReviews.slice(0, 2));
-    // setVisibleReviewsCounter(2);
+    setVisibleReviewsCounter(2);
   }, [allReviews]);
 
   // any change in visibleReviewsCounter should update visible reviews (if statement reduces redundant renders)
@@ -120,7 +132,7 @@ const ReviewParent = () => {
 
   // render our components once review metadata has been fetched
   if (productId === 0) {
-    return (<div className="reviewParent">Loading...</div>);
+    return (<div id="reviewParent" className="reviewParent">Loading...</div>);
 
   } else {
 
@@ -140,9 +152,11 @@ const ReviewParent = () => {
           fourStarRatings,
           fiveStarRatings,
           characteristics,
+          allReviews, setAllReviews,
           visibleReviewsCounter, setVisibleReviewsCounter,
           visibleReviews,
-          sortOn
+          sortOn, setSortOn,
+          fetchProductReviews
         } }>
 
           <div className="reviewParentContainer">
