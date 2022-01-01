@@ -6,14 +6,15 @@ const SelectSize = () => {
 
   const {currentItem} = useContext(GlobalContext);
   const {allStyles, styles} = useContext(OverviewContext);
-  // console.log('allstyles :' + allStyles);
-  // console.log('styles :' + styles);
+
+  // console.log(allStyles);
+
 
 return (
   <div>
     <select name="selectList" className="selectList">
       <option value="option 1">Select Size</option>
-      <option value="option 2">Option 2</option>
+
     </select>
     <select name="selectList" className="selectList">
       <option value="option 1">Quantity</option>

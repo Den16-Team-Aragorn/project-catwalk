@@ -5,6 +5,7 @@ import OverviewParent from './Overview/OverviewParent.jsx';
 import Related from './RelatedItems/Related.jsx';
 import ReviewParent from './RatingsReviews/ReviewParent.jsx';
 import axios from 'axios';
+import SitewideAnnouncement from './Header/SitewideAnnouncement.jsx';
 
 const App = () => {
 
@@ -36,6 +37,7 @@ const App = () => {
   <div>
     <GlobalContext.Provider value={ {currentItem, setCurrentItem, allProducts}}>
       <Header />
+      <SitewideAnnouncement />
       <OverviewParent />
       <Related />
       <ReviewParent />

@@ -6,6 +6,7 @@ import {useContext, useState, useEffect} from 'react';
 import GlobalContext from '../../../Contexts/index.jsx'
 import OverviewContext from '../../../Contexts/OverviewContext.jsx'
 import axios from 'axios';
+import SideImages from './SideImages.jsx';
 import ImageCarousel from './ImageCarousel.jsx';
 import Slideshow from './Slideshow.jsx';
 
@@ -26,6 +27,7 @@ const ImageGallery = () => {
 
   const { currentItem, setCurrentItem } = useContext(GlobalContext);
   const {styles, setStyles, setStyle} = useContext(OverviewContext);
+  const {showReview, setShowReview} = useContext(OverviewContext);
 
   useEffect(() => {
 
@@ -35,7 +37,8 @@ const ImageGallery = () => {
 
   return (
     <div className="imageGalleryParent">
-      <Slideshow images={styles === [] ? dummyimages : styles}/>
+      <SideImages images={styles === [] ? dummyimages : styles}/>
+      <Slideshow images={styles === [] ? dummyimages : styles} showReview={showReview}/>
     </div>
 
   );

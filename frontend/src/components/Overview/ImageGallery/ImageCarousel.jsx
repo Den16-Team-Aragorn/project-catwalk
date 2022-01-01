@@ -10,11 +10,13 @@ const ImageCarousel = () => {
 
 
   useEffect(() => {
+    if(currentItem.id !== undefined) {
     axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
       setStyles(res.data.results);
     }).catch((err) => {
       console.log('error in imagecarousel');
     })
+  }
   }, [currentItem]);
 
 
@@ -23,9 +25,9 @@ const ImageCarousel = () => {
   }
 
   return (
-    <div>
+
       <img className="image-carousel" src={styles[0].photos[0].url}/>
-    </div>
+
   );
 };
 

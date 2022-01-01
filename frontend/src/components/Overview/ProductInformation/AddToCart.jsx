@@ -2,6 +2,11 @@ import React from 'react';
 import {FaRegStar, FaStar} from 'react-icons/fa';
 
 const AddToCart = () => {
+
+  const handleClick = () => {
+    console.log('clicked');
+  }
+
   return (
     <div>
       <select name="selectList" className="selectList">
@@ -10,7 +15,7 @@ const AddToCart = () => {
       </select>
       <label className="overview-favorite">
           <input className="overview-checkbox" type="checkbox" />
-          <FaRegStar />
+          <FaRegStar onClick={handleClick}/>
        </label>
 
     </div>
