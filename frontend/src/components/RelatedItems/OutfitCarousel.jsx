@@ -1,60 +1,46 @@
-import React, {useState, useContext, useEffect} from 'react';
-import { OutfitData1 } from './OutfitData.jsx';
-import {FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa';
+import React, { useState, useContext, useEffect } from 'react';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import GlobalContext from '../../Contexts/index.jsx';
+import RelatedContext from './RelatedContext.jsx'
 import axios from 'axios';
-const stateHolder = []
+import OutfitCard from './OutfitCard.jsx'
 
-const OutfitCarousel = ({ slides }) => {
-  const [outfit, setOutfit] = useState(0);
-  const [outfitData, setOutfitData] = useState([]);
-  const {currentItem} = useContext(GlobalContext);
-
-
-
-  const length = slides.length
-
-  // var length = 0;
-  // if (outfitData.length <= 0) {
-  //   length = 1
-  // } else {
-  //   length = outfitData.length;
-  // }
-
-  const addToOutfit = (productID) => {
-    axios.get(`api/products/${productID}`).then((res) => {
-      stateHolder.push(res.data);
-      setOutfitData(stateHolder);
-    }).catch( (err) => {
-      console.log('error in OutfitCarousel')
-    })
+const OutfitCarousel = () => {
+  const [outfitSlide, setOutfitSlide] = useState(0);
+  const {outfitData} = useContext(RelatedContext);
+  const { currentItem } = useContext(GlobalContext);
+  var length = 0;
+  if (outfitData.length <= 0) {
+    length = 1
+  } else {
+    length = outfitData.length;
   }
 
-  useEffect(() => {
-    addToOutfit(currentItem.id);
-  }, [currentItem])
-
   const nextSlide = () => {
-    setOutfit(outfit === length - 1 ? 0 : outfit + 1)
+    if (length >= 2) {
+      setOutfitSlide(outfitSlide === length - 1 ? 0 : outfitSlide + 1)
+    }
   };
 
   const prevSlide = () => {
-    setOutfit(outfit === 0 ? length - 1 : outfit - 1)
+    if (length >= 2) {
+      setOutfitSlide(outfitSlide === 0 ? length - 1 : outfitSlide - 1)
+    }
   };
 
   return (
     <section className="outfitSlider">
-      <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide}/>
-      <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide}/>
-      {OutfitData1.map((slide, index) => {
-         return (
-           <div className={index === outfit ? 'outfitSlideActive' : 'outfitSlide'} key={index}>
-             {index === outfit && (<img src={slide.image} alt="loading image"
-              className="carouselImage" />
-              )}
-
-           </div>
-         )
+      <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
+      <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
+      {outfitData.map((slide, index) => {
+        return (
+          <div className={index === outfitSlide ? 'outfitSlideActive' : 'outfitSlide'} key={index}
+          >
+          {index === outfitSlide && (<OutfitCard slide={slide}
+          className="carouselImage"/>
+           )}
+        </div>
+        )
       })}
     </section>
   );

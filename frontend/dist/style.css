@@ -283,17 +283,19 @@ body {
 
 .related {
   height: 100vh;
-  width: 70vw;
-  background-color: greenyellow;
+  width: 77vw;
+  background-color: #8FC1E3;
+  font-family: sans-serif;
   margin: auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
 }
 
 .outfitSlider {
   position: relative;
   height: 50vh;
+  width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -308,9 +310,10 @@ body {
 }
 
 .carouselImage {
+  margin: auto;
   position: relative;
   width: 250px;
-  height: 300px;
+  height: 250px;
   border-radius: 5px;
 }
 
@@ -358,3 +361,17 @@ body {
   transform: scale(1.08);
 }
 
+.hoverimage {
+  margin-left: 20vw;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.relatedCard {
+  margin-left: auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
