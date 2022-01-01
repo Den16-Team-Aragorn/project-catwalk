@@ -20,10 +20,16 @@ const ReviewMetadata = () => {
     totalReviews,
     characteristics} = useContext(ReviewContext);
 
+  // metadata variables
+  let oneStarPercentage = Math.floor((oneStarRatings/totalReviews)*100);
+  let twoStarPercentage = Math.floor((twoStarRatings/totalReviews)*100);
+  let threeStarPercentage = Math.floor((threeStarRatings/totalReviews)*100);
+  let fourStarPercentage = Math.floor((fourStarRatings/totalReviews)*100);
+  let fiveStarPercentage = Math.floor((fiveStarRatings/totalReviews)*100);
 
   // click event handler for star ratings
   const starRatingClickEventHandler = (event) => {
-    let stars = event.target.id.slice(0,1);
+    let stars = event.target.innerText.slice(0,1);
     console.log(stars);
     // this will need to be completed, need to filter current reviews by star rating
     // also needs to work if multiple stars are selected
@@ -31,8 +37,7 @@ const ReviewMetadata = () => {
   };
 
 
-
-
+  // might need some sort of if-statement here to render properly in case no reviews exist
   return (
     <div className="reviewMetadata">
 
@@ -41,37 +46,50 @@ const ReviewMetadata = () => {
         <div className="avgRatingStars">
           <Stars rating={avgRating} starRatedColor={"black"} numberOfStars={5} starDimension={"2vh"} starSpacing={"0vh"} />
         </div>
-
       </div>
 
       <div>
         {percentRecommend}% of reviews recommend this product
       </div>
 
-      <div>
-        <span id="5star" onClick={() => { starRatingClickEventHandler(event) }}>5 stars</span>
-        <span> -- {fiveStarRatings}</span>
-
+      <div className="reviewMetaRatingBreakdown">
+        <div className="reviewMetaRatingLabel" onClick={() => { starRatingClickEventHandler(event) }}>5 stars</div>
+        <div className="reviewMetaRatingBar">
+          <div className="reviewMetaRatingGreen" style={{width: `${fiveStarPercentage}%`}}>{fiveStarRatings}</div>
+          <div className="reviewMetaRatingGrey"  style={{width: `${100 - fiveStarPercentage}%`}}></div>
+        </div>
       </div>
-      <div>
-        <span id="4star" onClick={() => { starRatingClickEventHandler(event) }}>4 stars</span>
-        <span> -- {fourStarRatings}</span>
 
+      <div className="reviewMetaRatingBreakdown">
+        <div className="reviewMetaRatingLabel" onClick={() => { starRatingClickEventHandler(event) }}>4 stars</div>
+        <div className="reviewMetaRatingBar">
+          <div className="reviewMetaRatingGreen" style={{width: `${fourStarPercentage}%`}}>{fourStarRatings}</div>
+          <div className="reviewMetaRatingGrey"  style={{width: `${100 - fourStarPercentage}%`}}></div>
+        </div>
       </div>
-      <div>
-        <span id="3star" onClick={() => { starRatingClickEventHandler(event) }}>3 stars</span>
-        <span> -- {threeStarRatings}</span>
 
+      <div className="reviewMetaRatingBreakdown">
+        <div className="reviewMetaRatingLabel" onClick={() => { starRatingClickEventHandler(event) }}>3 stars</div>
+        <div className="reviewMetaRatingBar">
+          <div className="reviewMetaRatingGreen" style={{width: `${threeStarPercentage}%`}}>{threeStarRatings}</div>
+          <div className="reviewMetaRatingGrey"  style={{width: `${100 - threeStarPercentage}%`}}></div>
+        </div>
       </div>
-      <div>
-        <span id="2star" onClick={() => { starRatingClickEventHandler(event) }}>2 stars</span>
-        <span> -- {twoStarRatings}</span>
 
+      <div className="reviewMetaRatingBreakdown">
+        <div className="reviewMetaRatingLabel" onClick={() => { starRatingClickEventHandler(event) }}>2 stars</div>
+        <div className="reviewMetaRatingBar">
+          <div className="reviewMetaRatingGreen" style={{width: `${twoStarPercentage}%`}}>{twoStarRatings}</div>
+          <div className="reviewMetaRatingGrey"  style={{width: `${100 - twoStarPercentage}%`}}></div>
+        </div>
       </div>
-      <div>
-        <span id="1star" onClick={() => { starRatingClickEventHandler(event) }}>1 stars</span>
-        <span> -- {oneStarRatings}</span>
 
+      <div className="reviewMetaRatingBreakdown">
+        <div className="reviewMetaRatingLabel" onClick={() => { starRatingClickEventHandler(event) }}>1 stars</div>
+        <div className="reviewMetaRatingBar">
+          <div className="reviewMetaRatingGreen" style={{width: `${oneStarPercentage}%`}}>{oneStarRatings}</div>
+          <div className="reviewMetaRatingGrey"  style={{width: `${100 - oneStarPercentage}%`}}></div>
+        </div>
       </div>
 
       <ReviewCharacteristics characteristics={characteristics} />

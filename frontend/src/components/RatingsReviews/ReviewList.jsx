@@ -7,9 +7,6 @@ const ReviewList = () => {
 
   const {visibleReviewsCounter, visibleReviews} = useContext(ReviewContext);
 
-
-
-
   return (
     <div className="reviewList">
 
