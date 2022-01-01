@@ -6,20 +6,20 @@ import StyleCard from './StyleCard.jsx';
 
 const OverviewStyle = () => {
   const {currentItem, setCurrentItem} = useContext(GlobalContext);
-  const {styles, setStyles, setStyle} = useContext(GlobalContext);
+  const {styles, setStyles, setStyle, allStyles} = useContext(OverviewContext);
   const [item, setItem] = useState('');
   const [styleId, setStyleId] = useState([]);
 
 
   useEffect(() => {
+    if(currentItem.id !== undefined) {
     axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
       setItem(res.data.results[0].name)
       setStyleId(res.data.results);
     }).catch((err) => {
       console.log('error in overviewstyle');
-    })
+    })}
   }, [currentItem]);
-
 
 
   return (

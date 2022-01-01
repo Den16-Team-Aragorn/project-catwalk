@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {FaChevronCircleLeft, FaChevronCircleRight, FaExpand} from "react-icons/fa";
 
 
   class Slideshow extends React.Component {
     state = {
       current: 0,
+      clicked: false
     }
+
 
     goBack = () => {
       const { images } = this.props
@@ -19,12 +21,16 @@ import {FaChevronCircleLeft, FaChevronCircleRight, FaExpand} from "react-icons/f
       current === 0 ? this.setState({ current: images.length - 1 }) : this.setState({ current: current - 1 })
     }
 
+    expand = () => {
+      this.setState({clicked: !this.state.clicked});
+    }
+
     render() {
       const { current } = this.state;
       const { images } = this.props;
       return(
-        <div className="overview-slideshow-container">
-          <FaExpand className="overview-expand-button"/>
+        <div className={!this.state.clicked ? "overview-slideshow-container" : "overview-slideshow-container-clicked"}>
+          <FaExpand className="overview-expand-button" onClick={this.expand}/>
           <div
             className="overview-slideshow-imageContainer"
             style={{

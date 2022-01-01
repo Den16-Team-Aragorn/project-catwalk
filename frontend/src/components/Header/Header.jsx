@@ -2,6 +2,7 @@
 /* eslint-disable arrow-body-style */
 import React from 'react';
 import {FaSearch} from "react-icons/fa";
+import SitewideAnnouncement from './SitewideAnnouncement.jsx';
 
 const Header = () => {
   return (
@@ -13,6 +14,7 @@ const Header = () => {
            <FaSearch className="search-icon"/>
         </div>
     </div>
+
   );
 };
 
