@@ -1,50 +1,27 @@
-import React, {useState, useContext, useEffect} from 'react';
-import GlobalContext from '../../Contexts/index.jsx';
-import RelatedContext from './RelatedContext.jsx'
-import axios from 'axios';
+import React, { useState, useContext, useEffect } from 'react';
 
-const RelatedCard = (props) => {
-  const [current, setCurrent] = useState([]);
-  const [currentStyle, setCurrentStyle] = useState([]);
-  const {relatedItems} = useContext(RelatedContext);
-  const {currentItem} = useContext(GlobalContext);
+const RelatedCard = ({ slide }) => {
+    const [Hover, setHover] = useState(false);
 
 
-  const fetchRelatedItem = (productID) => {
-    axios.get(`/api/products/${productID}`).then((res) => {
-      setCurrent(res.data);
-    }).catch( (err) => {
-      console.log('error in relatedItemsCarousel')
-    })
-  };
-
-  const fetchRelatedItemStyle = (productID) => {
-    axios.get(`/api/products/${productID}/styles`).then((res) => {
-      setCurrentStyle(res.data);
-    }).catch( (err) => {
-      console.log('error in relatedItemsCarousel')
-    })
-  };
-  useEffect(() => {
-    fetchRelatedItem(props.item);
-    fetchRelatedItemStyle(props.item);
-}, [currentItem]);
-
-
-  if (currentStyle.results === undefined) {
     return (
-      <div>oops</div>
-    )
- //console.log('oops')
-    } else {
-      return (
-        <div style={{ height: 50, display: 'flex', justifyContent: 'space-around', flexdirection: 'row', alignitems: 'center' }}>
-        <div>item here: {current.name}</div>
-        <div>pic here: </div>
-        <img src={currentStyle.results[0].photos[0].thumbnail_url}></img>
+        <div className='relatedCard'>
+
+            {Hover && (
+                <div>
+                    <img className='hoverimage' src={slide.results[0].photos[1].thumbnail_url} />
+                </div>
+            )}
+            <img onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className='carouselImage' src={slide.results[0].photos[0].thumbnail_url} />
         </div>
-      );
-    }
+    );
 };
 
 export default RelatedCard;
+
+// {slide.results[0].photos.map((result, index) => {
+//     return (
+//     <img key={index} className='hoverimage' src={result.thumbnail_url} />
+//     )
+// })}
+
