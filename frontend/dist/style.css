@@ -250,23 +250,24 @@ body {
 // ================================================
 */
 
-/* ReviewParent */
+/* ======= ReviewParent ======= */
 .reviewParent {
   height: 100vh;
-  width: 70vw;
+  width: 77vw;
   background-color: cyan;
   margin: auto;
 
   font-family: sans-serif;
+  font-size: 1rem;
 }
 
 .reviewParentContainer {
   display: flex;
 }
 
-/* ReviewMetadata */
+/* ======= ReviewMetadata ======= */
 .reviewMetadata {
-  width: 25%;
+  width: 30%;
   border: 1px solid black;
   margin: 1vh;
   background-color: seagreen;
@@ -282,19 +283,100 @@ body {
   font-weight: bold;
 }
 
-/* ReviewListContainer */
-.reviewListContainer {
+.reviewMetaRatingBreakdown {
+  display: flex;
+  width: 100%;
+}
+
+.reviewMetaRatingLabel {
+  width: 25%;
+  text-decoration: underline;
+}
+
+.reviewMetaRatingLabel:hover {
+  cursor: pointer;
+}
+
+.reviewMetaRatingBar {
+  display: flex;
+  height: 1rem;
   width: 75%;
+}
+
+.reviewMetaRatingGreen {
+  background-color: blue;
+  color: white;
+  text-align: center;
+}
+
+.reviewMetaRatingGrey {
+  background-color: grey;
+}
+
+.reviewCharacteristicsList {
+  width: 100%;
+}
+
+.reviewCharacteristic {
+  width: 100%;
+}
+
+.reviewCharacteristicBar {
+  display: flex;
+}
+
+.reviewCharacteristicBarPortion {
+  flex: 1 1 auto;
+  background-color: grey;
+  height: 1rem;
+  margin: 0 0.25vw;
+}
+
+.reviewCharacteristicsIconBar {
+  width: 100%;
+  margin-bottom: -2rem;
+}
+
+.reviewCharacteristicsIcon {
+  height: 2rem;
+  position: relative;
+  bottom: 1.8rem;
+}
+
+.reviewCharacteristicBottomLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1vh;
+}
+
+/* ======= ReviewListContainer ======= */
+.reviewListContainer {
+  width: 70%;
   border: 1px solid black;
   margin: 1vh;
   background-color: peru;
 }
 
-/* ReviewTile */
+.reviewSortBtn {
+  border: none;
+  text-decoration: underline;
+  background-color: peru;
+}
+
+.reviewList {
+  height: 75vh;
+  overflow: auto;
+}
+
+/* ======= ReviewTile ======= */
 .reviewTile {
   border: 1px solid black;
   background-color: rgb(248, 206, 165);
-  height: 15vh;
+  height: 25vh;
+}
+
+.reviewTileHidden {
+  display: none;
 }
 
 .reviewTileHeader {
@@ -304,13 +386,46 @@ body {
 
 .reviewTileSummary {
   font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.reviewTilePhotos {
+  display: flex;
+}
+
+.reviewTilePhoto {
+  margin-left: 4vw;
+  width: 4vw;
 }
 
 .reviewTileFooter {
   display: flex;
 }
 
-/* ReviewListButtons */
+.reviewTileHelpfulNotClicked:hover,
+.reviewTileReportNotClicked:hover {
+  cursor: pointer;
+}
+
+.reviewTileHelpfulNotClicked {
+  text-decoration: underline;
+}
+
+.reviewTileReportNotClicked {
+  text-decoration: underline;
+}
+
+/* maybe delete??? */
+.reviewTileHelpfulClicked {
+  text-decoration: underline;
+}
+
+/* maybe delete??? */
+.reviewTileReportClicked {
+  text-decoration: underline;
+}
+
+/* ======= ReviewListButtons ======= */
 .ReviewListButtons {
   display: flex;
 }
@@ -323,17 +438,19 @@ body {
 
 .related {
   height: 100vh;
-  width: 70vw;
-  background-color: greenyellow;
+  width: 77vw;
+  background-color: #8FC1E3;
+  font-family: sans-serif;
   margin: auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: wrap;
 }
 
 .outfitSlider {
   position: relative;
   height: 50vh;
+  width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -348,9 +465,10 @@ body {
 }
 
 .carouselImage {
+  margin: auto;
   position: relative;
   width: 250px;
-  height: 300px;
+  height: 250px;
   border-radius: 5px;
 }
 
@@ -398,3 +516,17 @@ body {
   transform: scale(1.08);
 }
 
+.hoverimage {
+  margin-left: 20vw;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.relatedCard {
+  margin-left: auto;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
