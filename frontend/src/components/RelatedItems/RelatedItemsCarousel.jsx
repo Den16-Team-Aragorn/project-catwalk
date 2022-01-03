@@ -55,7 +55,7 @@ const RelatedItemsCarousel = () => {
         <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
         {relatedData.map((slide, index) => {
           return (
-            <div key={index}>
+            <div className="RelatedContext" key={index}>
               <div onClick={() => relatedSetter(slide)} className={index === shownSlide ? 'relatedSlideActive' : 'relatedSlide'} >
                 {index === shownSlide && (<RelatedCard slide={slide}
                   className="carouselImage" />

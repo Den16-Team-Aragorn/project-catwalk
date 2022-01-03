@@ -443,25 +443,64 @@ body {
   font-family: sans-serif;
   margin: auto;
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
 }
 
-.outfitSlider {
+.relatedTitle {
+  margin: 5px;
+  padding-top: 2;
+  font-family: fantasy;
+  font-size: 25;
+  text-align: center;
+  width: 77vw;
+  background-color: #5085A5;
+}
+
+.relateditemscarousel {
+  width: 77vw;
+  height: 100vh;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.relatedSlider {
+  border-radius: 20px;
+  margin: 5px;
+  padding-top: 5px;
+  background-color: #687864;
   position: relative;
-  height: 50vh;
+  height: 60vh;
   width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.relatedSlider {
-  position: relative;
-  height: 50vh;
-  width: 50vw;
-  display: flex;
+
+.relatedCard {
+  margin-left: auto;
   justify-content: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+}
+
+.relatedInfo {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  color: #F7F9FB;
+  justify-content: space-between;
+}
+
+.relatedSlide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.relatedSlideActive {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
 }
 
 .carouselImage {
@@ -494,6 +533,18 @@ body {
   user-select: none;
 }
 
+.outfitSlider {
+  border-radius: 20px;
+  margin: 5px;
+  background-color: #687864;
+  position: relative;
+  height: 60vh;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .outfitSlide {
   opacity: 0;
   transition-duration: 1s ease;
@@ -503,30 +554,28 @@ body {
   opacity: 1;
   transition-duration: 1s;
   transform: scale(1.08);
+  align-items: center;
 }
 
-.relatedSlide {
-  opacity: 0;
-  transition-duration: 1s ease;
-}
-
-.relatedSlideActive {
-  opacity: 1;
-  transition-duration: 1s;
-  transform: scale(1.08);
-}
-
-.hoverimage {
-  margin-left: 20vw;
-  width: 50px;
-  height: 50px;
+.hoverimages {
+  height: 10vh;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
-.relatedCard {
-  margin-left: auto;
-  justify-content: center;
+.singleHover {
+  height: 5vh;
+  width: 5vh;
+}
+
+.outfitCard {
   display: flex;
   flex-direction: column;
+}
+
+.clearButton {
+  background-color: #31708E;
+  align-items: center;
+  size: auto;
 }

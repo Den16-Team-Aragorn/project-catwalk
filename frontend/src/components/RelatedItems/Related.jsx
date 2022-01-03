@@ -44,7 +44,9 @@ const Related = () => {
     <div className="related">
       <div className="relateditemscarousel">
         <RelatedContext.Provider value={{ relatedItems, setRelatedItems, outfitData, setOutfitData, relatedData, setRelatedData }}>
+          <div className="relatedTitle">Related Items</div>
           <RelatedItemsCarousel />
+          <div className="relatedTitle">My Outfit</div>
           <OutfitCarousel />
         </RelatedContext.Provider>
       </div>
