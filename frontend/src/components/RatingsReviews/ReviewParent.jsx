@@ -132,13 +132,15 @@ const ReviewParent = () => {
 
   // render our components once review metadata has been fetched
   if (productId === 0) {
-    return (<div id="reviewParent" className="reviewParent">Loading...</div>);
+    return (<div className="reviewParent">Loading...</div>);
 
   } else {
 
     return (
-      <div className="reviewParent">
-        RATINGS & REVIEWS
+      <div id="reviewParent" className="reviewParent">
+        <div className="reviewParentHeader">
+          RATINGS & REVIEWS
+        </div>
 
         {/* context provider gives child components access to parent state */}
         <ReviewContext.Provider value={ {
