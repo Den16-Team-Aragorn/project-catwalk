@@ -1,5 +1,5 @@
-import React, {useState, useContext} from 'react';
-// import ReviewContext from '../../Contexts/reviewContext.jsx';
+import React, {useState} from 'react';
+import ReactModal from 'react-modal';
 import {DateTime} from 'luxon';
 import Stars from 'react-star-ratings';
 import axios from 'axios';
@@ -7,12 +7,15 @@ import axios from 'axios';
 
 const ReviewTile = (props) => {
 
-  // import state context
-  // const {fetchProductReviews, setAllReviews} = useContext(ReviewContext);
+  // bind modal to app element. something to do with screen readers. works, but throws error if not used.
+  ReactModal.setAppElement('#app');
 
   // create state variables
+  const [viewFullBody, setViewFullBody] = useState(false);
   const [helpfulClicked, setHelpfulClicked] = useState(false);
   const [reportClicked, setReportClicked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalPhoto, setModalPhoto] = useState('');
 
   // create element that will limit review summary to 60 chars
   let reviewSummary;
@@ -25,14 +28,27 @@ const ReviewTile = (props) => {
     reviewSummary = (<div className="reviewTileSummary">{props.review.summary}</div>);
   }
 
-  // create element that will limit review body to 250 chars-- STILL NEED TO IMPLEMENT CLICK EVENT/MODAL TO SHOW ENTIRE REVIEW BODY
+  // create element that will limit review body to 250 chars unless 'show more' is clicked on
   let reviewBody;
   if (props.review.body.length > 250) {
-    reviewBody = (
-      <div className="reviewTileBody">
-        {props.review.body.slice(0, 250)}...
-        <span className="reviewTileBodyShowMore">show more +</span>
-      </div>);
+
+    if (!viewFullBody) {
+      reviewBody = (
+        <div className="reviewTileBody">
+          {props.review.body.slice(0, 250)}...
+          <span className="reviewTileBodyShowMoreLess" onClick={ () => {setViewFullBody(true)}}>show more +</span>
+        </div>);
+    } else {
+      reviewBody = (
+        <div className="reviewTileBody">
+          {props.review.body}
+          <div className="reviewTileBodyShowMoreLess" onClick={ () => {setViewFullBody(false)}}>show less -</div>
+        </div>);
+    }
+
+
+
+
   } else {
     reviewBody = (<div className="reviewTileBody">{props.review.body}</div>);
   }
@@ -44,18 +60,17 @@ const ReviewTile = (props) => {
     photos = (
       <div className="reviewTilePhotos">
         {props.review.photos.map( (photo) => (
-          <img className="reviewTilePhoto" src={photo.url} key={photo.id} />
+          <img className="reviewTilePhoto" src={photo.url} key={photo.id} onClick={ () => {photoClickEventHandler(event.target.src)}}/>
         ))}
-
       </div>);
   } else {
-    photos = (<div className="reviewTilePhotos"></div>);
+    photos = (<div></div>);
   }
 
   // create element that will render if reviewer recommended the product
   let recommend;
   if (props.review.recommend) {
-    recommend = (<div>&#10003; I recommend this product</div>);
+    recommend = (<div className="reviewTileRecommend">&#10003; I recommend this product</div>);
   } else {
     recommend = (<div></div>);
   }
@@ -63,7 +78,7 @@ const ReviewTile = (props) => {
   // create element that will render if sales team responded to review
   let response;
   if (!props.review.response) {
-    response = (<div>{props.review.response}</div>);
+    response = (<div className="reviewTileResponse">{props.review.response}</div>);
   } else {
     response = (<div></div>);
   }
@@ -72,22 +87,29 @@ const ReviewTile = (props) => {
   let reviewTileFooter;
   if (!helpfulClicked) {
     reviewTileFooter = (
-      <div className="reviewTileFooter">
-        <div>Helpful? </div>
+      <div className="reviewTileFooterNotClicked">
+        <div style={{marginRight: '1vh'}}>Helpful? </div>
         <div className="reviewTileHelpfulNotClicked" onClick={ () => {helpfulClickEventHandler()}}>Yes</div>
-        <div> ({props.review.helpfulness}) |</div>
+        <div style={{marginLeft: '.25vh'}}>({props.review.helpfulness})</div>
+        <div style={{margin: '0 1vh'}}>|</div>
         <div className="reviewTileReportNotClicked" onClick={ () => {reportClickEventHandler()}}>Report</div>
       </div>)
   } else {
     reviewTileFooter = (
-    <div className="reviewTileFooter">
-      <div>Helpful? </div>
-      <div className="reviewTileHelpfulClicked">Yes ({props.review.helpfulness + 1}) </div>
-      <div> | </div>
+    <div className="reviewTileFooterClicked">
+      <div style={{marginRight: '1vh'}}>Helpful? </div>
+      <div className="reviewTileHelpfulClicked">Yes</div>
+      <div style={{marginLeft: '.25vh'}}>({props.review.helpfulness + 1})</div>
+      <div style={{margin: '0 1vh'}}>|</div>
       <div className="reviewTileReportClicked">Report</div>
     </div>)
   }
 
+  // click event handlers for review photos
+  const photoClickEventHandler = (url) => {
+    setModalPhoto(url);
+    setShowModal(true);
+  };
 
   // click event handler for helpful. put request is sent to db to update helpful counter, and it is re-rendered locally with count + 1
   const helpfulClickEventHandler = () => {
@@ -154,6 +176,14 @@ const ReviewTile = (props) => {
 
         {/* render tile footer based on whether helpful/report has been clicked or not */}
         {reviewTileFooter}
+
+        {/* modal opens when a review photo is clicked */}
+        <ReactModal isOpen={showModal}>
+          <button className="reviewTileModalCloseBtn" onClick={ () => {setShowModal(false)}}>X</button>
+          <div>
+            <img className="reviewTileModalPhoto" src={modalPhoto} />
+          </div>
+        </ReactModal>
 
       </div>
     );

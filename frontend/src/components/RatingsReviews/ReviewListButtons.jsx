@@ -18,15 +18,15 @@ const ReviewListButtons = () => {
   // render add review button, and more reviews button if there are more to display
   if (visibleReviewsCounter < totalReviews) {
     return (
-      <div className="ReviewListButtons">
-        <button onClick={ () => { moreReviewsClickHandler() }}>MORE REVIEWS</button>
-        <button>ADD A REVIEW +</button>
+      <div className="reviewListButtons">
+        <button className="reviewListButton" onClick={ () => { moreReviewsClickHandler() }}>MORE REVIEWS</button>
+        <button className="reviewListButton">ADD A REVIEW +</button>
       </div>
     )
   } else {
     return (
-      <div className="ReviewListButtons">
-        <button>ADD A REVIEW +</button>
+      <div className="reviewListButtons">
+        <button className="reviewListButton">ADD A REVIEW +</button>
       </div>
     );
   }

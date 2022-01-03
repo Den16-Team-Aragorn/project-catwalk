@@ -21,10 +21,14 @@ const ReviewListContainer = () => {
 
     return (
       <div className="reviewListContainer">
-        <ReviewSort />
-        <ReviewList />
+        <div className="reviewListContainerInner">
+          <ReviewSort />
+          <ReviewList />
+        </div>
+
         <ReviewListButtons />
       </div>
+
     );
   }
 

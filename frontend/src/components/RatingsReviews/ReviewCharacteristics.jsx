@@ -24,19 +24,16 @@ const ReviewCharacteristics = (props) => {
         (
           <div className="reviewCharacteristic" key={key}>
             <div>{key}</div>
-            {/* <div className="reviewCharacteristicBar">====={props.characteristics[key].value}=====</div> */}
             <div className="reviewCharacteristicBar">
               <div className="reviewCharacteristicBarPortion"></div>
               <div className="reviewCharacteristicBarPortion"></div>
               <div className="reviewCharacteristicBarPortion"></div>
             </div>
 
-            {/* need to figure this out after lunch. need to use a div/span/relative position to position icon properly */}
-            <div className="reviewCharacteristicsIconBar">
-              <span style={{width: `${props.characteristics[key].value/5}%`}}></span>
+            <div className="reviewCharacteristicIconBar">
+              <div className="reviewCharacteristicIconSpacer" style={{width: `${(props.characteristics[key].value / 5)*100}%`}}></div>
               <FaCaretDown className="reviewCharacteristicsIcon"/>
             </div>
-
 
             <div className="reviewCharacteristicBottomLabels">
               <div>{labels[key].left}</div>

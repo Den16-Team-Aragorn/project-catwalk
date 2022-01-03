@@ -48,7 +48,7 @@ const ReviewMetadata = () => {
         </div>
       </div>
 
-      <div>
+      <div className="reviewMetaPercentRecommend">
         {percentRecommend}% of reviews recommend this product
       </div>
 
