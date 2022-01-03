@@ -1,22 +1,31 @@
-import React from 'react';
-import {FaRegStar, FaStar} from 'react-icons/fa';
+import React, {useState} from 'react';
+import {FaRegStar, FaStar, FaCartPlus} from 'react-icons/fa';
 
 const AddToCart = () => {
 
+  const [clicked, setClicked] = useState(false);
+
   const handleClick = () => {
-    console.log('clicked');
+    setClicked(!clicked);
+    console.log(clicked);
+  }
+
+  const cartClick = () => {
+    console.log('cart clicked');
   }
 
   return (
     <div>
-      <select name="selectList" className="selectList">
-        <option value="option 1">Add to bag</option>
-        <option value="option 2">Option 2</option>
-      </select>
+      <button name="overview-add-to-bad" className="overview-add-to-bag" onClick={cartClick}>
+        <FaCartPlus className="overview-cart-icon" size="35"/>
+      </button>
       <label className="overview-favorite">
           <input className="overview-checkbox" type="checkbox" />
-          <FaRegStar onClick={handleClick}/>
-       </label>
+          {
+            !clicked ? <FaRegStar onClick={handleClick} className="overview-favorite-star" />
+            : <FaStar onClick={handleClick} className="overview-favorite-star-clicked" />
+          }
+          </label>
 
     </div>
   )

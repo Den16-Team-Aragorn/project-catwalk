@@ -37,6 +37,7 @@ const OverviewParent = () => {
   const getAllStyles = () => {
     if(currentItem.id !== undefined) {
     axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
+
       setAllStyles(res.data);
     }).catch((err) => {
       console.log('error in getAllStyles');
