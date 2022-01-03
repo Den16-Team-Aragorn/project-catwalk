@@ -29,7 +29,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    // fetchAllProducts();
+    //fetchAllProducts();
     fetchItemData(44390);
   }, []);
 
