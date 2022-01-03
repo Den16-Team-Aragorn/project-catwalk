@@ -167,6 +167,16 @@ body {
 .star-ratings {
   z-index: 0;
 }
+
+.overview-favorite-star {
+  color:grey;
+
+}
+
+.overview-favorite-star-clicked {
+  color: gold;
+}
+
 .style-- {
   margin-left: 15px;
 }
@@ -184,6 +194,15 @@ body {
   margin: 10px;
   width: 150px;
   height: 40px;
+}
+
+.overview-add-to-bag {
+  width: 150px;
+  height: 40px;
+  background-color: #F7F9FB;
+  color: black;
+  text-align: center;
+  margin: 10px;
 }
 
 .overview-favorite {

@@ -12,8 +12,8 @@ const OverviewReview = () => {
 
   return (
     <div className="overviewReviews">
-      <StarRatings className="overviewStars" rating={avgRating || 0}/>
-      <a href="#reviewParentContainer">Read all reviews...</a>
+      <StarRatings className="overviewStars" rating={avgRating || 0} starDimension={"2vh"} starSpacing={"0vh"}/>
+      <a href="#reviewParent">Read all reviews...</a>
     </div>
   );
 };
