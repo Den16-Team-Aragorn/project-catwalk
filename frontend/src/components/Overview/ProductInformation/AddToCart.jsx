@@ -7,11 +7,10 @@ const AddToCart = () => {
 
   const handleClick = () => {
     setClicked(!clicked);
-    console.log(clicked);
   }
 
   const cartClick = () => {
-    console.log('cart clicked');
+    console.log('item added');
   }
 
   return (

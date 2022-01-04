@@ -5,11 +5,26 @@ import axios from 'axios';
 
 const StyleCard = (props) => {
   const {currentItem} = useContext(GlobalContext);
-  const {allStyles} = useContext(OverviewContext);
+  const {allStyles, styles, setStyles} = useContext(OverviewContext);
+
+
+
+  const handleClick = (e) => {
+    let photoArrayOfObjs = props.item.photos;
+    let tempArray = [];
+    photoArrayOfObjs.forEach((element) => {
+      tempArray.push(element.url);
+    })
+    setStyles(tempArray);
+
+    props.onClick(e);
+  }
+
+
 
   return (
 
-      <img className='overviewImages' src={props.item.photos[0].url}/>
+      <img className={'overviewImages'} onClick={handleClick} src={props.item.photos[0].thumbnail_url}/>
 
   );
 };
