@@ -9,16 +9,18 @@ const RelatedItemsCarousel = () => {
   const [shownSlide, setshownSlide] = useState(0)
   const { currentItem } = useContext(GlobalContext);
   const { setCurrentItem } = useContext(GlobalContext);
-  const { relatedData } = useContext(RelatedContext);
+  const { relatedData, relatedReviews } = useContext(RelatedContext);
+  const { relatedDataDetail } = useContext(RelatedContext);
   const { setRelatedData } = useContext(RelatedContext);
   const { outfitData } = useContext(RelatedContext);
+  var holdArray = []
+
   var length = 3;
   if (relatedData.length <= 1) {
     length = 3;
   } else {
     length = relatedData.length;
   }
-
   const relatedSetter = (slide) => {
     fetchItemData(slide.product_id);
   }
@@ -43,30 +45,44 @@ const RelatedItemsCarousel = () => {
     setshownSlide(shownSlide === 0 ? length - 1 : shownSlide - 1)
   };
 
-  if (relatedData[0] === undefined) {
+
+
+  if (relatedData.length === 0) {
     return (
-      <div>LOADING</div>
+      <div>LOADING RELATED ITEMS</div>
     )
   } else {
+
+    for (var i = 0; i < relatedData[0].length; i ++) {
+      let combined = {
+        ...relatedDataDetail[0][i],
+        ...relatedData[0][i],
+        ...relatedReviews[i]
+      }
+      holdArray.push(combined)
+    };
+  };
+
+
+  let cards = holdArray.map((slide, index) => {
+    return (
+      <div key={index} onClick={() => relatedSetter(slide)} className={index === shownSlide ? 'relatedSlideActive' : 'relatedSlide'} >
+          {index === shownSlide && (<RelatedCard slide={slide}
+                  className="carouselImage" />
+                )}
+        </div>
+    )
+  })
 
     return (
       <section className="relatedSlider" >
         <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
         <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
-        {relatedData.map((slide, index) => {
-          return (
-            <div className="RelatedContext" key={index}>
-              <div onClick={() => relatedSetter(slide)} className={index === shownSlide ? 'relatedSlideActive' : 'relatedSlide'} >
-                {index === shownSlide && (<RelatedCard slide={slide}
-                  className="carouselImage" />
-                )}
-              </div>
-            </div>
-          )
-        })}
+        <div className="RelatedContext" >
+        {cards}
+      </div>
       </section>
     );
-  }
 };
 
 export default RelatedItemsCarousel;
