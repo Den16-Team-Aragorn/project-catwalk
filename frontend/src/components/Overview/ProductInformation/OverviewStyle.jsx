@@ -9,6 +9,9 @@ const OverviewStyle = () => {
   const {styles, setStyles, setStyle, allStyles} = useContext(OverviewContext);
   const [item, setItem] = useState('');
   const [styleId, setStyleId] = useState([]);
+  const [selected, setSelected] = useState(false);
+  const [count, setCount] = useState("");
+
 
 
   useEffect(() => {
@@ -21,13 +24,22 @@ const OverviewStyle = () => {
     })}
   }, [currentItem]);
 
+  const handleClick = (e) => {
+    if(count !== "") {
+    count.classList.remove('overview-style-selected');
+    count.classList.add("overviewImages");
+    }
+    e.target.classList.remove('overviewImages');
+    e.target.classList.add('overview-style-selected');
+    setCount(event.target);
+  }
 
   return (
     <div>
       <p className='style--'>STYLE > {currentItem.id === undefined ? 'Loading...' : item}</p>
       <div className="overviewMap">
         {styleId.map((element) => (
-          <StyleCard key={element.style_id} item={element} />
+          <StyleCard key={element.style_id} item={element} onClick={handleClick}/>
         ))}
       </div>
     </div>

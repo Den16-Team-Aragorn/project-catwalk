@@ -10,7 +10,7 @@ const ReviewTile = (props) => {
   // bind modal to app element. something to do with screen readers. works, but throws error if not used.
   ReactModal.setAppElement('#app');
 
-  // create state variables
+  // set state variables
   const [viewFullBody, setViewFullBody] = useState(false);
   const [helpfulClicked, setHelpfulClicked] = useState(false);
   const [reportClicked, setReportClicked] = useState(false);

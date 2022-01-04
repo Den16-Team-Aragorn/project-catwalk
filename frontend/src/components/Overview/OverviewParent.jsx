@@ -18,6 +18,7 @@ const OverviewParent = () => {
   const [totalReviews, setTotalReviews] = useState(0);
   const [avgRating, setAvgRating] = useState(0);
   const [showReview, setShowReview] = useState(true);
+  const [currentPhoto, setCurrentPhoto] = useState("");
 
   const setStyle = () => {
     if(currentItem.id !== undefined) {
@@ -79,7 +80,7 @@ const OverviewParent = () => {
   return (
     <div>
       <OverviewContext.Provider value={ {styles, setStyles, allStyles, setAllStyles,
-         getAllStyles, setStyle, avgRating, showReview, setShowReview} }>
+         getAllStyles, setStyle, avgRating, showReview, setShowReview, currentPhoto, setCurrentPhoto} }>
       <div className="overviewParent">
           <ImageGallery />
           <ProductInformationParent />
