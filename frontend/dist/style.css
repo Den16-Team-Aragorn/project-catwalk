@@ -553,6 +553,20 @@ body {
   text-decoration: underline;
 }
 
+/* ======= ReviewPostForm ======= */
+.reviewPostRatings,
+.reviewPostRecommended,
+.reviewPostCharacteristics,
+.reviewPostSummary,
+.reviewPostBody,
+.reviewPostPhotos,
+.reviewPostUsername,
+.reviewPostEmail,
+.reviewPostButtons {
+  margin-top: 2vh;
+}
+
+
 /*
 // ================================================
 // Related Items
