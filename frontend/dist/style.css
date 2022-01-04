@@ -639,11 +639,26 @@ body {
 }
 
 .relatedInfo {
+  border-style: double;
+  border-width: 2px;
   display: flex;
   flex-direction: row;
   text-align: center;
   color: #F7F9FB;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: center;
+  width: 30vh;
+}
+.relatedInfo2 {
+  border-style: double;
+  border-width: 2px;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  color: #F7F9FB;
+  justify-content: space-around;
+  align-items: center;
+  width: 30vh;
 }
 
 .relatedSlide {
@@ -660,8 +675,8 @@ body {
 .carouselImage {
   margin: auto;
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 30vh;
+  height: 15vw;
   border-radius: 5px;
 }
 
@@ -733,3 +748,4 @@ body {
   align-items: center;
   size: auto;
 }
+

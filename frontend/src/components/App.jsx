@@ -28,10 +28,25 @@ const App = () => {
     })
   };
 
+  function getRandomStart(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+
+
   useEffect(() => {
     //fetchAllProducts();
-    fetchItemData(44390);
+     fetchItemData(44388)
+    //fetchItemData(getRandomStart(44388, 45398));
   }, []);
+
+  //added this to stop bugs
+
+  if (currentItem.id == null) {
+    return <div>LOADING</div>
+  }
 
   return (
   <div>
