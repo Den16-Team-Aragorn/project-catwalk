@@ -27,7 +27,9 @@ const ImageGallery = () => {
 
   const { currentItem, setCurrentItem } = useContext(GlobalContext);
   const {styles, setStyles, setStyle} = useContext(OverviewContext);
-  const {showReview, setShowReview} = useContext(OverviewContext);
+  const {showReview, setShowReview, currentPhoto, setCurrentPhoto} = useContext(OverviewContext);
+
+
 
   useEffect(() => {
 
@@ -38,7 +40,7 @@ const ImageGallery = () => {
   return (
     <div className="imageGalleryParent">
       <SideImages images={styles === [] ? dummyimages : styles}/>
-      <Slideshow images={styles === [] ? dummyimages : styles} showReview={showReview}/>
+      <Slideshow images={styles === [] ? dummyimages : styles} showReview={showReview} currentPhoto={currentPhoto}/>
     </div>
 
   );
