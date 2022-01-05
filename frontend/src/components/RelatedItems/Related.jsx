@@ -63,7 +63,15 @@ const Related = () => {
         })
       });
     });
-  }, [currentItem]);
+  }, []);
+
+  if (currentItem.id == null) s{
+    return null
+  }
+
+  if (relatedDataDetail.length === 0) {
+    return <div>LOADING</div>
+  }
 
   if (currentItem.id == null) {
     return null
@@ -92,9 +100,7 @@ export default Related;
 
 
 
-
-
-
-
-
-
+<<<<<<< HEAD
+=======
+  // .then((res) => {
+  //   relatedObjects.push(res.data);

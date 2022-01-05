@@ -93,6 +93,7 @@ body {
   height: 80px;
   width: auto;
   margin-top: 5px;
+  z-index: 1;
 }
 
 .overview-slideshow-imageContainer {
@@ -166,6 +167,10 @@ body {
 }
 .star-ratings {
   z-index: 0;
+}
+
+.overview-read-all-reviews {
+  margin-left: 15px;;
 }
 
 .overview-favorite-star {
@@ -261,6 +266,18 @@ body {
   border-radius: 50%;
   flex-basis:22%;
   border: 2px solid black;
+}
+
+.overview-style-selected {
+  width: 5em;
+  max-width: 5em;
+  min-width: 5em;
+  height: 5em;
+  margin-right: 1%;
+  margin-bottom: 1%;
+  border-radius: 50%;
+  flex-basis:22%;
+  border: 2px solid yellow;
 }
 
 /*
@@ -552,6 +569,56 @@ body {
   cursor: pointer;
   text-decoration: underline;
 }
+
+/* ======= ReviewPostForm ======= */
+.reviewPostRatings,
+.reviewPostRecommended,
+.reviewPostCharacteristics,
+.reviewPostSummary,
+.reviewPostBody,
+.reviewPostPhotos,
+.reviewPostUsername,
+.reviewPostEmail,
+.reviewPostErrors,
+.reviewPostButtons {
+  margin-top: 2vh;
+}
+
+.reviewPostModal {
+  position: absolute;
+  inset: 5vh 20vh;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}
+
+.reviewPostHeader {
+  background-color: #8FC1E3;
+}
+
+.reviewPostHeaderTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.reviewPostSectionTitle {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.reviewPostRatingsItem,
+.reviewPostRecommendedItem,
+.reviewPostCharacteristicsItem {
+  margin-left: 2vh;
+}
+
+.reviewPostErrors {
+  color: red;
+}
+
 
 /*
 // ================================================

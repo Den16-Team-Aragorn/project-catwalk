@@ -8,8 +8,8 @@ const DescriptionCheckboxes = () => {
   } else {
   return (
     <div className="checkBoxesText">
-      {currentItem.features.map((element) => (
-        <li key={element.feature + ''} style={{"listStyleType": "none"}}>{'✓  ' + element.feature}</li>
+      {currentItem.features.map((element, index) => (
+        <li key={index} style={{"listStyleType": "none"}}>{'✓  ' + element.value}</li>
   ))}
 
     </div>

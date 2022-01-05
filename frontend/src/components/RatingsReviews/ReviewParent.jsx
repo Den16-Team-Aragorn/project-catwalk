@@ -100,15 +100,6 @@ const ReviewParent = () => {
   useEffect( () => {
     setVisibleReviewsCounter(2);
     fetchReviewMetadataAndReviews();
-
-    // *** BUG *** : 1. different sort is selected (example newest)
-    //               2. currentItem is changed
-    //               3. this triggers re-render via functions above
-    //               4. still need to reset sortOn (preferably without duplicate re-renders from both useEffects (currentItem & sortOn))
-    //               5. still need to reset <select> element to return to default value ('relevant')
-    //               6. or maybe ignore it for now and focus on more important stuff and fix later if you have time
-    //               7. maybe refactor one/both fetch functions to take an arg/args to specify sortOn parameter
-    // setSortOn('relevant');
   }, [currentItem]);
 
   // any change in allReviews (current product change or new sort) should reset visible reviews and counter
