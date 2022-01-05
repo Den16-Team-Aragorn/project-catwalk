@@ -24,7 +24,7 @@ const ReviewListButtons = () => {
 
   //create modal element
   const modal = (
-    <ReactModal isOpen={showModal}>
+    <ReactModal isOpen={showModal} className="reviewPostModal">
       <ReviewPostForm setShowModal={setShowModal} />
     </ReactModal>);
 
