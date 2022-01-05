@@ -65,7 +65,7 @@ const Related = () => {
     });
   }, []);
 
-  if (currentItem.id == null) s{
+  if (currentItem.id == null) {
     return null
   }
 
@@ -97,10 +97,3 @@ const Related = () => {
 
 
 export default Related;
-
-
-
-<<<<<<< HEAD
-=======
-  // .then((res) => {
-  //   relatedObjects.push(res.data);

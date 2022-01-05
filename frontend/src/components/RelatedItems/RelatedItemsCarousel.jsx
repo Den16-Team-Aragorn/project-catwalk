@@ -16,15 +16,6 @@ const RelatedItemsCarousel = () => {
     setRelatedData,
     outfitData } = useContext(RelatedContext);
   var holdArray = [];
-  var length = 0;
-  const [shownSlide, setshownSlide] = useState(0)
-  const { currentItem } = useContext(GlobalContext);
-  const { setCurrentItem } = useContext(GlobalContext);
-  const { relatedData, relatedReviews } = useContext(RelatedContext);
-  const { relatedDataDetail } = useContext(RelatedContext);
-  const { setRelatedData } = useContext(RelatedContext);
-  const { outfitData } = useContext(RelatedContext);
-  var holdArray = []
 
   var length = 3;
   if (relatedData.length <= 1) {
@@ -78,9 +69,8 @@ const RelatedItemsCarousel = () => {
   let cards = holdArray.map((slide, index) => {
     return (
       <div key={index} onClick={() => relatedSetter(slide)} className={index === shownSlide ? 'relatedSlideActive' : 'relatedSlide'} >
-          {index === shownSlide && (<RelatedCard slide={slide}
-                  className="carouselImage" />
-                )}
+          <RelatedCard slide={slide} className="carouselImage" />
+
         </div>
     )
   })
