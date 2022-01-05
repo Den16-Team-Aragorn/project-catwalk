@@ -579,8 +579,44 @@ body {
 .reviewPostPhotos,
 .reviewPostUsername,
 .reviewPostEmail,
+.reviewPostErrors,
 .reviewPostButtons {
   margin-top: 2vh;
+}
+
+.reviewPostModal {
+  position: absolute;
+  inset: 5vh 20vh;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}
+
+.reviewPostHeader {
+  background-color: #8FC1E3;
+}
+
+.reviewPostHeaderTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.reviewPostSectionTitle {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.reviewPostRatingsItem,
+.reviewPostRecommendedItem,
+.reviewPostCharacteristicsItem {
+  margin-left: 2vh;
+}
+
+.reviewPostErrors {
+  color: red;
 }
 
 

@@ -31,7 +31,6 @@ const ReviewTile = (props) => {
   // create element that will limit review body to 250 chars unless 'show more' is clicked on
   let reviewBody;
   if (props.review.body.length > 250) {
-
     if (!viewFullBody) {
       reviewBody = (
         <div className="reviewTileBody">
@@ -45,17 +44,12 @@ const ReviewTile = (props) => {
           <div className="reviewTileBodyShowMoreLess" onClick={ () => {setViewFullBody(false)}}>show less -</div>
         </div>);
     }
-
-
-
-
   } else {
     reviewBody = (<div className="reviewTileBody">{props.review.body}</div>);
   }
 
   // create an element that will display any photos included in the review if they exists
   let photos;
-  // console.log(props.review.photos);
   if (props.review.photos.length > 0) {
     photos = (
       <div className="reviewTilePhotos">
@@ -130,14 +124,14 @@ const ReviewTile = (props) => {
     console.log('If you wish to test the functionality, un-comment the axios request in /components/RatingReviews/ReviewTile.jsx');
 
     // THIS IS COMMENTED OUT SO I DONT ACCIDENTALLY REMOVE TOO MANY REVIEWS DURING TESTING. RE-ENABLE BEFORE SUBMITTING
-    // axios
-    //   .put(`/api/reviews/${props.review.review_id}/report`)
-    //   .then( (res) => {
-    //     setReportClicked(true);
-    //   })
-    //   .catch( (err) => {
-    //     console.log('there was an error in report put request');
-    //   });
+    axios
+      .put(`/api/reviews/${props.review.review_id}/report`)
+      .then( (res) => {
+        setReportClicked(true);
+      })
+      .catch( (err) => {
+        console.log('there was an error in report put request');
+      });
   };
 
 
@@ -178,6 +172,8 @@ const ReviewTile = (props) => {
         {reviewTileFooter}
 
         {/* modal opens when a review photo is clicked */}
+
+
         <ReactModal isOpen={showModal}>
           <button className="reviewTileModalCloseBtn" onClick={ () => {setShowModal(false)}}>X</button>
           <div>
