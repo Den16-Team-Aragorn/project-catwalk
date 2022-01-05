@@ -1,6 +1,6 @@
 import React, {useState, useContext, useEffect} from 'react';
 import {FaChevronCircleLeft, FaChevronCircleRight, FaExpand} from "react-icons/fa";
-
+import OverviewContext from '../../../Contexts/OverviewContext.jsx'
 
   // class Slideshow extends React.Component {
 
@@ -9,8 +9,9 @@ import {FaChevronCircleLeft, FaChevronCircleRight, FaExpand} from "react-icons/f
   //     clicked: false
   //   }
   const Slideshow = (props) => {
-    const [current, setCurrent] = useState(0);
+    const {current, setCurrent} = useContext(OverviewContext);
     const [clicked, setClicked] = useState(false);
+
 
 
     // goBack = () => {
@@ -19,14 +20,18 @@ import {FaChevronCircleLeft, FaChevronCircleRight, FaExpand} from "react-icons/f
     //   current >= images.length - 1 ? this.setState({ current: 0 }) : this.setState({ current: current + 1 })
     // }
       const goBack = () => {
-        console.log('clicked back');
+
         let images = props.images;
-        current >= images.length - 1 ? setCurrent(0) : setCurrent(current + 1)
+        current === 0 ? setCurrent(images.length - 1) : setCurrent(current - 1);
+
+
       }
       const goForward = () => {
-        console.log('clicked forward');
+
         let images = props.images;
-        current === 0 ? setCurrent(images.length -1) : setCurrent(current - 1)
+        current >= images.length - 1 ? setCurrent(0) : setCurrent(current + 1);
+
+
       }
 
     // goForward = () => {
@@ -49,7 +54,7 @@ import {FaChevronCircleLeft, FaChevronCircleRight, FaExpand} from "react-icons/f
               <div
                 className="overview-slideshow-imageContainer"
                 style={{
-                  backgroundImage: `url(${props.images[current] || props.images[props.images.length - 1]})`
+                  backgroundImage: `url(${props.images[current] || props.images[props.images.length]})`
                 }}>
 
                 <div className="overview-slideshow-controls">

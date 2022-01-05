@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 import GlobalContext from '../../../Contexts/index.jsx';
 import OverviewContext from '../../../Contexts/OverviewContext.jsx';
 
@@ -21,27 +21,28 @@ const SelectSize = () => {
       }
   }, [allStyles, currentItem])
 
-  const handleChange = (e) => {
 
-    setCurrentSize(e.target.value);
-
+  useEffect(() => {
     for(let key in sizeAndQuantity) {
-
-      if(sizeAndQuantity[key].size === e.target.value) {
+      if(sizeAndQuantity[key].size === currentSize) {
         setCurrentQuantity(sizeAndQuantity[key].quantity <= 15 ? sizeAndQuantity[key].quantity
-          : 15 )
+          : 15)
       }
+}
+  }, [currentSize])
 
 
-      let tempArr = [];
-      for(let i = 1; i <= currentQuantity; i++) {
-        tempArr.push(i);
-      }
-      setQuantityArray(tempArr);
-
-
+  useEffect(() => {
+    let tempArr = [];
+    for(let i = 1; i <= currentQuantity; i++) {
+      tempArr.push(i);
     }
+    setQuantityArray(tempArr);
+  }, [currentQuantity])
 
+
+  const handleChange = (e) => {
+    setCurrentSize(e.target.value);
   }
 
 
