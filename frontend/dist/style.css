@@ -84,7 +84,7 @@ body {
   position:absolute;
   height: 10vh;
   width: 100px;
-  top: 150px;
+  top: 120px;
   display: flex;
   flex-direction: column;
   margin-left: 40px;
@@ -94,6 +94,22 @@ body {
   width: auto;
   margin-top: 5px;
   z-index: 1;
+  object-fit: cover;
+
+}
+
+ .overview-sideImage-control {
+  font-size: 4em;
+}
+
+.overview-sideImage-selected {
+  height: 80px;
+  width: auto;
+  margin-top: 5px;
+  z-index: 1;
+  border-bottom: 12px solid #5085A5;
+  object-fit: cover;
+
 }
 
 .overview-slideshow-imageContainer {
@@ -266,6 +282,7 @@ body {
   border-radius: 50%;
   flex-basis:22%;
   border: 2px solid black;
+  object-fit: cover;
 }
 
 .overview-style-selected {
@@ -278,6 +295,7 @@ body {
   border-radius: 50%;
   flex-basis:22%;
   border: 2px solid yellow;
+  object-fit: cover;
 }
 
 /*

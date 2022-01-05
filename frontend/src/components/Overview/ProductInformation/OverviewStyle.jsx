@@ -13,7 +13,6 @@ const OverviewStyle = () => {
   const [count, setCount] = useState("");
 
 
-
   useEffect(() => {
     if(currentItem.id !== undefined) {
     axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
@@ -31,15 +30,17 @@ const OverviewStyle = () => {
     }
     e.target.classList.remove('overviewImages');
     e.target.classList.add('overview-style-selected');
-    setCount(event.target);
+    setCount(e.target);
   }
+
+
 
   return (
     <div>
       <p className='style--'>STYLE > {currentItem.id === undefined ? 'Loading...' : item}</p>
       <div className="overviewMap">
-        {styleId.map((element) => (
-          <StyleCard key={element.style_id} item={element} onClick={handleClick}/>
+        {styleId.map((element, index) => (
+          <StyleCard key={element.style_id} item={element} onClick={handleClick} salePrice={element.sale_price}/>
         ))}
       </div>
     </div>

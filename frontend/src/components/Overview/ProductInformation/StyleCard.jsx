@@ -6,6 +6,9 @@ import axios from 'axios';
 const StyleCard = (props) => {
   const {currentItem} = useContext(GlobalContext);
   const {allStyles, styles, setStyles} = useContext(OverviewContext);
+  const {currentPhoto, setCurrentPhoto} = useContext(OverviewContext);
+  const {salePrice, setSalePrice} = useContext(OverviewContext);
+
 
 
 
@@ -18,7 +21,10 @@ const StyleCard = (props) => {
     setStyles(tempArray);
 
     props.onClick(e);
+    setSalePrice(props.salePrice);
   }
+
+
 
 
 

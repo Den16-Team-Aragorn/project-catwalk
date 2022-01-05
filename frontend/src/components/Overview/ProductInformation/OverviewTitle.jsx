@@ -5,7 +5,7 @@ import OverviewContext from '../../../Contexts/OverviewContext.jsx';
 const OverviewTitle = () => {
   const {currentItem} = useContext(GlobalContext);
   const {getAllStyles, allStyles, setAllStyles} = useContext(OverviewContext);
-  const [price, setPrice] = useState(currentItem.default_price);
+  const {salePrice, setSalePrice} = useContext(OverviewContext);
 
    useEffect(() => {
 
@@ -14,12 +14,15 @@ const OverviewTitle = () => {
   }, [currentItem]);
 
 
-
   return (
     <div className="overviewTitle">
       <p>{currentItem.category}</p>
       <h2>{currentItem.name}</h2>
-      <p>{`$${currentItem.default_price}`}</p>
+      {
+      salePrice === null ? <p>{`$${currentItem.default_price}`}</p> :
+      <p><span style={{color: "maroon"}}>Sale Price: ${salePrice + "  "}</span>
+      <span style={{"text-decoration": "line-through"}}>{"$" + currentItem.default_price}</span></p>
+      }
     </div>
   );
 };
