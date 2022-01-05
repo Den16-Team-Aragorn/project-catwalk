@@ -23,11 +23,7 @@ const ReviewPostForm = (props) => {
   const [photos, setPhotos] = useState(['', '', '', '', '']);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-
-
-
-  // ************************ NEED TO SET REMAINING STATE VALUES FOR CHARACTERISTICS
-  // ************************ also need change the handler function to set characteristic appropriately
+  const [formErrors, setFormErrors] = useState([]);
 
 
   // create element to display product characteristics
@@ -48,11 +44,11 @@ const ReviewPostForm = (props) => {
         <div key={key}>
           <div>{key}</div>
           <div onChange={ () => {characteristicOnChange(event)}}>
-            <input type="radio" id={`${key}1`} name={key} value="1"/>{labels[key][1]}
-            <input type="radio" id={`${key}2`} name={key} value="2"/>{labels[key][2]}
-            <input type="radio" id={`${key}3`} name={key} value="3"/>{labels[key][3]}
-            <input type="radio" id={`${key}4`} name={key} value="4"/>{labels[key][4]}
-            <input type="radio" id={`${key}5`} name={key} value="5"/>{labels[key][5]}
+            <input type="radio" id={`${key}1`} name={key} className="reviewPostCharacteristicsItem" value="1"/>{labels[key][1]}
+            <input type="radio" id={`${key}2`} name={key} className="reviewPostCharacteristicsItem" value="2"/>{labels[key][2]}
+            <input type="radio" id={`${key}3`} name={key} className="reviewPostCharacteristicsItem" value="3"/>{labels[key][3]}
+            <input type="radio" id={`${key}4`} name={key} className="reviewPostCharacteristicsItem" value="4"/>{labels[key][4]}
+            <input type="radio" id={`${key}5`} name={key} className="reviewPostCharacteristicsItem" value="5"/>{labels[key][5]}
           </div>
         </div>
       )
@@ -64,7 +60,17 @@ const ReviewPostForm = (props) => {
   if (body.length < 50) {
     bodyLengthCounter = (<div>Minimum of 50 characters required. {50 - body.length} more characters required.</div>);
   } else {
-    bodyLengthCounter = (<div></div>);
+    bodyLengthCounter = (<div>Minimum length reached.</div>);
+  }
+
+  // create an element to display form data errors
+  let formErrorsList;
+  if (formErrors.length === 0) {
+    formErrorsList = (<div></div>);
+  } else {
+    formErrorsList = formErrors.map( (error) => (
+      <div className="reviewPostError" key={error}>{error}</div>
+    ));
   }
 
 
@@ -84,7 +90,6 @@ const ReviewPostForm = (props) => {
 
   // characteristic onChange handler
   const characteristicOnChange = (event) => {
-    // console.log(event.target.name);
 
     if (event.target.name === 'Size') {
       setSize(event.target.value);
@@ -131,25 +136,6 @@ const ReviewPostForm = (props) => {
   };
 
   // post review onClick handler
-
-  // {
-  //   "product_id": 44390,
-  //   "rating": 4,
-  //   "summary": "these joggers are life changing",
-  //   "body": "I wore them once, tripped and fell down some stairs, now I'm paralyzed.",
-  //   "recommend": true,
-  //   "name": "unluckyGuy69",
-  //   "email": "walkingishardnow@gmail.com",
-  //   "photos": [],
-  //   "characteristics": {
-  //       "148897": 4,
-  //       "148895": 4,
-  //       "148896": 4,
-  //       "148898": 4
-  //   }
-  // }
-
-
   const handlePost = () => {
 
     // build an obj from state variables to send in post request
@@ -182,17 +168,78 @@ const ReviewPostForm = (props) => {
     }
     requestObj.characteristics = characteristicsObj;
 
-    // console.log('requestObj: ', requestObj);
 
-    axios
-      .post('/api/reviews', requestObj)
-      .then( (res) => {
-        props.setShowModal(false);
-        fetchProductReviews();
-      })
-      .catch( (err) => {
-        console.log('there was an error handling your post request');
-      })
+    // validate form data. if valid, send post request, else display errors
+    let formDataValidity = validateFormData();
+
+    if (formDataValidity === true) {
+
+      // send the post request
+      axios
+        .post('/api/reviews', requestObj)
+        .then( (res) => {
+          props.setShowModal(false);
+          fetchProductReviews();
+        })
+        .catch( (err) => {
+          console.log('there was an error handling your post request');
+        })
+
+    } else {
+      setFormErrors(formDataValidity);
+    }
+  };
+
+  // validate all form data
+  const validateFormData = () => {
+
+    // create an array to store the list of errors
+    let errors = [];
+
+    // go through each form component searching for empty field or error. add error message to errors array if found
+    if (overallRating === null) {
+      errors.push('You must choose an overall rating.');
+    }
+    if (recommended === null) {
+      errors.push('You must choose whether or not you would recommend this product.');
+    }
+    if (characteristics.Size && Size === null) {
+      errors.push('You must select a Size option.')
+    }
+    if (characteristics.Width && Width === null) {
+      errors.push('You must select a Width option.')
+    }
+    if (characteristics.Comfort && Comfort === null) {
+      errors.push('You must select a Comfort option.')
+    }
+    if (characteristics.Quality && Quality === null) {
+      errors.push('You must select a Quality option.')
+    }
+    if (characteristics.Length && Length === null) {
+      errors.push('You must select a Length option.')
+    }
+    if (characteristics.Fit && Fit === null) {
+      errors.push('You must select a Fit option.')
+    }
+    if (summary.length <= 0) {
+      errors.push('You must include a summary.')
+    }
+    if (body.length < 50) {
+      errors.push('The body of the review must be 50 characters or greater.')
+    }
+    if (username.length <= 0) {
+      errors.push('You must include a username.')
+    }
+    if (email.length <= 0 || !email.includes('@')) {
+      errors.push('You must include a valid email.')
+    }
+
+    // if no errors found, return true, else return error list
+    if (errors.length === 0) {
+      return true;
+    } else {
+      return errors;
+    }
   };
 
 
@@ -201,49 +248,49 @@ const ReviewPostForm = (props) => {
 
     <div>
       <div className="reviewPostHeader">
-        <div>Write Your Review</div>
-        <div>About the {currentItem.name}</div>
+        <div className="reviewPostHeaderTitle">Write Your Review</div>
+        <div className="reviewPostHeaderSubtitle">About the <em>{currentItem.name}</em></div>
       </div>
 
       <div className="reviewPostRatings">
-        <div>Overall Rating</div>
+        <div className="reviewPostSectionTitle">Overall Rating</div>
         <div onChange={overallRatingOnChange}>
-          <input type="radio" id="reviewForm1Star" name="overallRating" value="1"/>1 Star
-          <input type="radio" id="reviewForm2Star" name="overallRating" value="2"/>2 Star
-          <input type="radio" id="reviewForm3Star" name="overallRating" value="3"/>3 Star
-          <input type="radio" id="reviewForm4Star" name="overallRating" value="4"/>4 Star
-          <input type="radio" id="reviewForm5Star" name="overallRating" value="5"/>5 Star
+          <input type="radio" id="reviewForm1Star" name="overallRating" className="reviewPostRatingsItem" value="1"/>1 Star
+          <input type="radio" id="reviewForm2Star" name="overallRating" className="reviewPostRatingsItem" value="2"/>2 Star
+          <input type="radio" id="reviewForm3Star" name="overallRating" className="reviewPostRatingsItem" value="3"/>3 Star
+          <input type="radio" id="reviewForm4Star" name="overallRating" className="reviewPostRatingsItem" value="4"/>4 Star
+          <input type="radio" id="reviewForm5Star" name="overallRating" className="reviewPostRatingsItem" value="5"/>5 Star
         </div>
       </div>
 
       <div className="reviewPostRecommended">
-        <div>Recommend or No?</div>
+        <div className="reviewPostSectionTitle">Do you recommend this product?</div>
         <div onChange={recommendedOnChange}>
-          <input type="radio" id="reviewFormRecYes" name="recommended" value="yes"/>Yes
-          <input type="radio" id="reviewFormRecNo" name="recommended" value="no"/>No
+          <input type="radio" id="reviewFormRecYes" name="recommended"className="reviewPostRecommendedItem" value="yes"/>Yes
+          <input type="radio" id="reviewFormRecNo" name="recommended" className="reviewPostRecommendedItem" value="no"/>No
         </div>
       </div>
 
       <div className="reviewPostCharacteristics">
-        <div>Characteristics</div>
+        <div className="reviewPostSectionTitle">Characteristics</div>
         <div>
           {characteristicsList}
         </div>
       </div>
 
       <div className="reviewPostSummary">
-        <div>Summary</div>
+        <div className="reviewPostSectionTitle">Summary</div>
         <input type="text" id="reviewFormSummary" name="summary" value={summary} onChange={summaryOnChange} placeholder="Best purchase ever!" />
       </div>
 
       <div className="reviewPostBody">
-        <div>Body</div>
+        <div className="reviewPostSectionTitle">Body</div>
         <textarea type="textarea" id="reviewFormBody" name="body" value={body} onChange={bodyOnChange} placeholder="Why did you like the product or not?" />
         {bodyLengthCounter}
       </div>
 
       <div className="reviewPostPhotos">
-        <div>Photos</div>
+        <div className="reviewPostSectionTitle">Photos (optional)</div>
         <div>
           <div>
             <input type="text" id="reviewFormPhoto0" name="photo0" value={photos[0]} onChange={photosOnChange} placeholder="https://cutepuppy@puppies.com" />
@@ -264,15 +311,19 @@ const ReviewPostForm = (props) => {
       </div>
 
       <div className="reviewPostUsername">
-        <div>Username</div>
+        <div className="reviewPostSectionTitle">Username</div>
         <input type="text" id="reviewFormUsername" name="username" value={username} onChange={usernameOnChange} placeholder="Example: jackson11!" />
         <div>For privacy reasons, do not use your full name or email address</div>
       </div>
 
       <div className="reviewPostEmail">
-        <div>Email</div>
+        <div className="reviewPostSectionTitle">Email</div>
         <input type="text" id="reviewFormEmail" name="email" value={email} onChange={emailOnChange} placeholder="Example: jackson11@email.com" />
         <div>For authentication reasons, you will not be emailed</div>
+      </div>
+
+      <div className = "reviewPostErrors">
+        {formErrorsList}
       </div>
 
       <div className="reviewPostButtons">

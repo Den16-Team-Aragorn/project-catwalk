@@ -31,7 +31,6 @@ const Related = () => {
         if (item != 44389) {
           getStyles.push(axios.get(`/api/products/${item}/styles`).then((result) => { return result.data }));
           getProducts.push(axios.get(`/api/products/${item}`).then((result) => { return result.data }));
-
           getReviews.push(axios.get(`/api/reviews/meta?product_id=${item}`));
         };
       });
@@ -74,6 +73,14 @@ const Related = () => {
     return <div>LOADING</div>
   }
 
+  if (currentItem.id == null) {
+    return null
+  }
+
+  if (relatedDataDetail.length === 0) {
+    return <div>LOADING</div>
+  }
+
   return (
     <div className="related">
       <div className="relateditemscarousel">
@@ -90,56 +97,3 @@ const Related = () => {
 
 
 export default Related;
-
-
-
-  // .then((res) => {
-  //   relatedObjects.push(res.data);
-  //   setRelatedData(relatedObjects);
-  // }).catch((err) => {
-  //   console.log('error in related', err)
-  // });
-
-
-  // .then((res) => {
-  //   relatedObjectsDetail.push(res.data)
-  //   setRelatedDataDetail(relatedObjectsDetail);
-  // }).catch((err) => {
-  //   console.log('error in related', err)
-  // });
-
-
-
-
-  // .then((res) => {
-  //   var relatedArray = res.data;
-  //   relatedArray.map((item, index) => {
-  //     if (item != 44389) {
-  //       axios.get(`/api/products/${item}/styles`).then((res) => {
-  //         relatedObjects.push(res.data);
-  //         setRelatedData(relatedObjects);
-  //       }).catch((err) => {
-  //         console.log('error in related', err)
-  //       });
-  //       axios.get(`/api/products/${item}`).then((res) => {
-  //         relatedObjectsDetail.push(res.data)
-  //         setRelatedDataDetail(relatedObjectsDetail);
-  //       }).catch((err) => {
-  //         console.log('error in related', err)
-  //       });
-  //     }
-  //   });
-  // }).catch((err) => {
-  //   console.log('error in related', err)
-  // });
-
-
-
-
-
-
-
-
-
-
-

@@ -5,15 +5,17 @@ import axios from 'axios';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
 import RelatedCard from './RelatedCard.jsx';
 
+
 const RelatedItemsCarousel = () => {
-  const [shownSlide, setshownSlide] = useState(0)
-  const { currentItem } = useContext(GlobalContext);
-  const { setCurrentItem } = useContext(GlobalContext);
-  const { relatedData, relatedReviews } = useContext(RelatedContext);
-  const { relatedDataDetail } = useContext(RelatedContext);
-  const { setRelatedData } = useContext(RelatedContext);
-  const { outfitData } = useContext(RelatedContext);
-  var holdArray = []
+  const [shownSlide, setshownSlide] = useState(0);
+  const { currentItem, setCurrentItem } = useContext(GlobalContext);
+  const {
+    relatedData,
+    relatedReviews,
+    relatedDataDetail,
+    setRelatedData,
+    outfitData } = useContext(RelatedContext);
+  var holdArray = [];
 
   var length = 3;
   if (relatedData.length <= 1) {
@@ -38,11 +40,11 @@ const RelatedItemsCarousel = () => {
   };
 
   const nextSlide = () => {
-    setshownSlide(shownSlide === length - 1 ? 0 : shownSlide + 1)
+    setshownSlide(shownSlide === length - 1 ? 0 : shownSlide + 1);
   };
 
   const prevSlide = () => {
-    setshownSlide(shownSlide === 0 ? length - 1 : shownSlide - 1)
+    setshownSlide(shownSlide === 0 ? length - 1 : shownSlide - 1);
   };
 
 
@@ -67,9 +69,8 @@ const RelatedItemsCarousel = () => {
   let cards = holdArray.map((slide, index) => {
     return (
       <div key={index} onClick={() => relatedSetter(slide)} className={index === shownSlide ? 'relatedSlideActive' : 'relatedSlide'} >
-          {index === shownSlide && (<RelatedCard slide={slide}
-                  className="carouselImage" />
-                )}
+          <RelatedCard slide={slide} className="carouselImage" />
+
         </div>
     )
   })
