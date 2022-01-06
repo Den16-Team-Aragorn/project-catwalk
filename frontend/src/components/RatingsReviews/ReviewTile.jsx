@@ -134,6 +134,11 @@ const ReviewTile = (props) => {
       });
   };
 
+  // keep modal picture on top of icons in background
+  const customStyles = {
+    overlay: {zIndex: 1000}
+  };
+
 
   // if the review is reported, do not render it, otherwise, display as normal
   if (reportClicked) {
@@ -174,7 +179,7 @@ const ReviewTile = (props) => {
         {/* modal opens when a review photo is clicked */}
 
 
-        <ReactModal isOpen={showModal}>
+        <ReactModal style={customStyles} isOpen={showModal}>
           <button className="reviewTileModalCloseBtn" onClick={ () => {setShowModal(false)}}>X</button>
           <div>
             <img className="reviewTileModalPhoto" src={modalPhoto} />
