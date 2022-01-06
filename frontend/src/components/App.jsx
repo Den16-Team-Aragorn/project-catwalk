@@ -38,7 +38,7 @@ const App = () => {
 
   useEffect(() => {
     //fetchAllProducts();
-     fetchItemData(44391)
+     fetchItemData(44388)
     //fetchItemData(getRandomStart(44388, 45398));
   }, []);
 

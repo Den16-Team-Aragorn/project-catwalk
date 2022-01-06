@@ -11,13 +11,14 @@ const OverviewStyle = () => {
   const [styleId, setStyleId] = useState([]);
   const [selected, setSelected] = useState(false);
   const [count, setCount] = useState("");
+  const [src, setSrc] = useState("");
 
 
   useEffect(() => {
     if(currentItem.id !== undefined) {
-    axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
-      setItem(res.data.results[0].name)
-      setStyleId(res.data.results);
+      axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
+        setItem(res.data.results[0].name)
+        setStyleId(res.data.results);
     }).catch((err) => {
       console.log('error in overviewstyle');
     })}
@@ -25,15 +26,26 @@ const OverviewStyle = () => {
 
   const handleClick = (e) => {
     if(count !== "") {
-    count.classList.remove('overview-style-selected');
-    count.classList.add("overviewImages");
+      count.classList.remove('overview-style-selected');
+      count.classList.add("overviewImages");
     }
+
     e.target.classList.remove('overviewImages');
     e.target.classList.add('overview-style-selected');
     setCount(e.target);
+
+    setSrc(e.target.src);
+
   }
 
+  useEffect(() => {
+    for(let i = 0; i < styleId.length; i++) {
 
+      if(styleId[i].photos[0].thumbnail_url === src) {
+        setItem(styleId[i].name);
+    }
+     }
+  }, [src])
 
   return (
     <div>

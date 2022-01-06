@@ -25,9 +25,7 @@ const ImageCarousel = () => {
   }
 
   return (
-
       <img className="image-carousel" src={styles[0].photos[0].url}/>
-
   );
 };
 
