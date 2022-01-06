@@ -21,7 +21,7 @@ const OverviewTitle = () => {
       {
       salePrice === null ? <p>{`$${currentItem.default_price}`}</p> :
       <p><span style={{color: "maroon"}}>Sale Price: ${salePrice + "  "}</span>
-      <span style={{"text-decoration": "line-through"}}>{"$" + currentItem.default_price}</span></p>
+      <span style={{"textDecoration": "line-through"}}>{"$" + currentItem.default_price}</span></p>
       }
     </div>
   );

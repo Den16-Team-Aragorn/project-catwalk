@@ -10,6 +10,7 @@ const SideImages = (props) => {
   const [end, setEnd] = useState(6);
   const [imagesLength, setImagesLength] = useState(0);
   const {current, setCurrent} = useContext(OverviewContext);
+  const [renderedImages, setRenderedImages] = useState([]);
 
   const handleClick = (e) => {
     if(count !== "") {
@@ -19,51 +20,48 @@ const SideImages = (props) => {
     e.target.classList.remove('overviewSideImage');
     e.target.classList.add('overview-sideImage-selected');
     setCount(event.target);
-    console.log(e.target);
-    setCurrent(e.target.id);
+    console.log(event.target);
+
+    setCurrent(Number(e.target.id) + start);
 
   }
 
   const handleScrollDown = () => {
 
-    if(end < imagesLength) {
-      setStart(start + 1);
-      setEnd(end + 1);
-
-    } else {
-      setStart(0);
-      setEnd(6);
-
-    }
-
-    setPhotoArray(props.images.slice(start, end));
-
-
-
+    // if(start + 6 < imagesLength) {
+    //   setStart(start + 1);
+    // } else {
+    //   setStart(0);
+    // }
+    start >= imagesLength -1 ? setStart(0) : setStart(start + 1);
+    document.getElementsByClassName('overview-sideImage-selected')[0].classList.add('overviewSideImage');
+    document.getElementsByClassName('overview-sideImage-selected')[0].classList.remove('overview-sideImage-selected');
   }
 
    const handleScrollUp = () => {
 
-    if(start ) {
-      setStart(start + 1);
-      setEnd(end + 1);
+    // if(start > 0 ) {
+    //   setStart(start - 1);
 
-    } else {
-      setStart(0);
-      setEnd(6);
+    // } else {
+    //   setStart(0);
+    // }
+    start === 0 ? setStart(0) : setStart(start - 1);
+    document.getElementsByClassName('overview-sideImage-selected')[0].classList.add('overviewSideImage');
+    document.getElementsByClassName('overview-sideImage-selected')[0].classList.remove('overview-sideImage-selected');
 
-    }
-    setPhotoArray(props.images.slice(start, end));
+
 
    }
 
   useEffect(() => {
     if(props.images !== undefined) {
-    setPhotoArray(props.images.slice(0, 6));
     setImagesLength(props.images.length);
+    setPhotoArray(props.images.slice(start,start  + 6));
+
     }
 
-  }, [props.images]);
+  }, [props.images, start]);
 
   return (
   <div className="overviewSideImageBox" >
