@@ -374,6 +374,12 @@ body {
   text-decoration: underline;
 }
 
+.reviewMetaRatingLabelActive {
+  width: 20%;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .reviewMetaRatingLabel:hover {
   cursor: pointer;
 }
@@ -611,6 +617,7 @@ body {
   border-radius: 4px;
   outline: none;
   padding: 20px;
+  z-index: 1000;
 }
 
 .reviewPostHeader {
