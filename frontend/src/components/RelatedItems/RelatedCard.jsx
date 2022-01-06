@@ -4,7 +4,7 @@ import RelatedContext from './RelatedContext.jsx';
 import StarRatings from 'react-star-ratings';
 import ReactModal from 'react-modal';
 import axios from 'axios'
-
+import { FaStar } from 'react-icons/fa';
 
 const RelatedCard = ({ slide }) => {
     ReactModal.setAppElement('#app');
@@ -16,6 +16,11 @@ const RelatedCard = ({ slide }) => {
     const relatedSetter = (slide) => {
         fetchItemData(slide.product_id);
       }
+
+      const customStyles = {
+        overlay: {zIndex: 1000}
+      };
+
 
       const fetchItemData = (productID) => {
         if (productID === undefined) {
@@ -31,11 +36,11 @@ const RelatedCard = ({ slide }) => {
 
     return (
         <div className='relatedCard'>
-            {/* <button>actionbutton</button> */}
-            <img onClick={() => relatedSetter(slide)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className='carouselImage' src={slide.results[0].photos[0].thumbnail_url} />
-            <div onClick={(event) => {
+            <FaStar onClick={(event) => {
                 event.stopPropagation()
-                setShowModal(true)}} className="relatedInfo">
+                setShowModal(true)}}size='3vh' className="starButton">actionbutton</FaStar>
+            <img onClick={() => relatedSetter(slide)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className='carouselImage' src={slide.results[0].photos[0].thumbnail_url} />
+            <div  className="relatedInfo">
                 <p>{slide.name}</p>
                 <p>{slide.category}</p>
                 </div>
@@ -43,11 +48,7 @@ const RelatedCard = ({ slide }) => {
                 <p>${slide.results[0].original_price}</p>
                 <StarRatings className="relatedStars" rating={slide.Rating || 0} starDimension={"2vh"} starSpacing={"0vh"} starRatedColor={'#8FC1E3'}/>
             </div>
-            <div className="relatedInfo2">
-                <p>${slide.results[0].original_price}</p>
-                <StarRatings className="relatedStars" rating={slide.Rating || 0} starDimension={"2vh"} starSpacing={"0vh"} starRatedColor={'#8FC1E3'} />
-            </div>
-            <ReactModal isOpen={showModal} className="relatedModal">
+            <ReactModal  style={customStyles} isOpen={showModal} className="relatedModal">
                 <button className="relatedModalCloseBtn" onClick={(event) => {
                     event.stopPropagation()
                     setShowModal(false) }}>X</button>
@@ -56,7 +57,6 @@ const RelatedCard = ({ slide }) => {
                     <p>{slide.category}</p>
                     <p>{slide.slogan}</p>
                     <p>${slide.results[0].original_price}</p>
-                    <StarRatings className="relatedStars" rating={slide.Rating || 0} starDimension={"2vh"} starSpacing={"0vh"} starRatedColor={'#8FC1E3'} />
                 </div>
                 <div className="relatedModalGuide">
                     <p>Item Name</p>
