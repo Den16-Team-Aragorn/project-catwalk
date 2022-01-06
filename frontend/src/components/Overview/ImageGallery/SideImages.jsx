@@ -20,7 +20,7 @@ const SideImages = (props) => {
     e.target.classList.remove('overviewSideImage');
     e.target.classList.add('overview-sideImage-selected');
     setCount(event.target);
-    console.log(event.target);
+
 
     setCurrent(Number(e.target.id) + start);
 
@@ -34,8 +34,10 @@ const SideImages = (props) => {
     //   setStart(0);
     // }
     start >= imagesLength -1 ? setStart(0) : setStart(start + 1);
-    document.getElementsByClassName('overview-sideImage-selected')[0].classList.add('overviewSideImage');
-    document.getElementsByClassName('overview-sideImage-selected')[0].classList.remove('overview-sideImage-selected');
+    if(document.getElementsByClassName('overview-sideImage-selected')[0] !== undefined) {
+       document.getElementsByClassName('overview-sideImage-selected')[0].classList.add('overviewSideImage');
+       document.getElementsByClassName('overview-sideImage-selected')[0].classList.remove('overview-sideImage-selected');
+    }
   }
 
    const handleScrollUp = () => {
@@ -47,9 +49,10 @@ const SideImages = (props) => {
     //   setStart(0);
     // }
     start === 0 ? setStart(0) : setStart(start - 1);
-    document.getElementsByClassName('overview-sideImage-selected')[0].classList.add('overviewSideImage');
-    document.getElementsByClassName('overview-sideImage-selected')[0].classList.remove('overview-sideImage-selected');
-
+    if(document.getElementsByClassName('overview-sideImage-selected')[0] !== undefined) {
+       document.getElementsByClassName('overview-sideImage-selected')[0].classList.add('overviewSideImage');
+       document.getElementsByClassName('overview-sideImage-selected')[0].classList.remove('overview-sideImage-selected');
+    }
 
 
    }

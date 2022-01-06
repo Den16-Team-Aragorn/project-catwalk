@@ -23,11 +23,11 @@ const OverviewParent = () => {
 
   const setStyle = () => {
     if(currentItem.id !== undefined) {
-    axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
-      let temp = res.data.results[0].photos;
-      let arr = [];
-      temp.forEach((element) => {
-        arr.push(element.url);
+      axios.get(`/api/products/${currentItem.id}/styles`).then((res) => {
+        let temp = res.data.results[0].photos;
+        let arr = [];
+        temp.forEach((element) => {
+          arr.push(element.url);
       })
       setStyles(arr);
 

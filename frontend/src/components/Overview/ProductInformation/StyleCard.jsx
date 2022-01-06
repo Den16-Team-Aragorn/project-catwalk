@@ -23,7 +23,6 @@ const StyleCard = (props) => {
     props.onClick(e);
     setSalePrice(props.salePrice);
 
-
   }
 
 
