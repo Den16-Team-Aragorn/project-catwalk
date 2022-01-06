@@ -4,9 +4,11 @@
   "description": "Den16 Team Aragorn FEC project",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "jest",
+    "test-coverage": "jest --coverage",
     "react-dev": "webpack --config ./webpack.config.js --mode development -w",
-    "start": "nodemon ./backend/server/index.js"
+    "start": "nodemon ./backend/server/index.js",
+    "react-prod": "webpack --config ./webpack.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,7 @@
     "@babel/preset-env": "^7.16.5",
     "babel-loader": "^8.2.3",
     "babel-preset-react-app": "^10.0.1",
+    "jest": "^27.4.7",
     "live-server": "^1.2.1",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1"
