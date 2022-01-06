@@ -16,13 +16,17 @@ app.use(express.json());
 
 app.use('/api/*', async (req, res) => {
   // console.log(API_KEY);
-  const payload = await axios({
+  const payload = axios({
     method: req.method.toLowerCase(),
     url: URL + req.originalUrl.slice(4),
     headers: { Authorization: API_KEY.API_KEY },
     data: req.body,
-  });
-  res.send(payload.data);
+  }).then((response) => {
+  res.send(response.data);
+  }).catch((err) => {
+    console.log('error in server', err)
+    res.status(500).send(err)
+  })
 });
 
 app.get('*', (req, res) => {

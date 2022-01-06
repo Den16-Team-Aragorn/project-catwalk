@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import GlobalContext from '../../Contexts/index.jsx';
 import RelatedContext from './RelatedContext.jsx';
 import axios from 'axios';
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa';
+import { FaArrowAltCircleRight, FaArrowAltCircleLeft} from 'react-icons/fa';
 import RelatedCard from './RelatedCard.jsx';
 
 
@@ -77,12 +77,13 @@ const RelatedItemsCarousel = () => {
 
     return (
       <section className="relatedSlider" >
-        <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
-        <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />
+        {/* <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
+        <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} /> */}
         <div className="RelatedContext" >
         {cards}
       </div>
       </section>
+
     );
 };
 

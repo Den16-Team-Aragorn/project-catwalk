@@ -8,8 +8,6 @@ import axios from 'axios';
 
 const ReviewParent = () => {
 
-  // console.log('reviewParent rendering...');
-
   // get current App item from global context
   const {currentItem} = useContext(GlobalContext);
 
@@ -27,6 +25,8 @@ const ReviewParent = () => {
   const [characteristics, setCharacteristics] = useState({});
 
   const [allReviews, setAllReviews] = useState([]);
+  const [filteredReviews, setFilteredReviews] = useState([]);
+  const [ratingFilter, setRatingFilter] = useState({allVisible: true, 1: false, 2: false, 3: false, 4: false, 5: false});
   const [visibleReviewsCounter, setVisibleReviewsCounter] = useState(2);
   const [visibleReviews, setVisibleReviews] = useState([]);
   const [sortOn, setSortOn] = useState('relevant');
@@ -102,23 +102,53 @@ const ReviewParent = () => {
     fetchReviewMetadataAndReviews();
   }, [currentItem]);
 
-  // any change in allReviews (current product change or new sort) should reset visible reviews and counter
-  useEffect( () => {
-    setVisibleReviews(allReviews.slice(0, 2));
-    setVisibleReviewsCounter(2);
-  }, [allReviews]);
-
-  // any change in visibleReviewsCounter should update visible reviews (if statement reduces redundant renders)
-  useEffect( () => {
-    if (visibleReviewsCounter > 2) {
-      setVisibleReviews(allReviews.slice(0, visibleReviewsCounter));
-    }
-  }, [visibleReviewsCounter]);
-
   // any change in sortOn should trigger a new fetch request for reviews
   useEffect( () => {
     fetchProductReviews();
   }, [sortOn]);
+
+  // any change in allReviews (current product change or new sort) should refresh the filtered reviews
+  useEffect( () => {
+    setVisibleReviewsCounter(2);
+    setFilteredReviews(filterReviews());
+  }, [allReviews]);
+
+  // any change in filteredReviews (current product change, new sort, ) should reset visible reviews
+  useEffect( () => {
+    setVisibleReviews(filteredReviews.slice(0, visibleReviewsCounter));
+  }, [filteredReviews]);
+
+  // any change in visibleReviewsCounter should update visible reviews (if statement reduces redundant renders)
+  useEffect( () => {
+    if (visibleReviewsCounter > 2) {
+      setVisibleReviews(filteredReviews.slice(0, visibleReviewsCounter));
+    }
+  }, [visibleReviewsCounter]);
+
+  // any change in ratingFilter should update filteredReviews
+  useEffect( () => {
+    setFilteredReviews(filterReviews());
+  }, [ratingFilter]);
+
+
+  // filter all reviews based on active filters
+  const filterReviews = () => {
+
+    let reviews = allReviews.slice();
+
+    if (ratingFilter.allVisible === true) {
+      return reviews;
+    } else {
+      for (let i = 0; i < reviews.length; i++) {
+        if (ratingFilter[reviews[i].rating] === false) {
+          reviews.splice(i, 1);
+          i--;
+        }
+      }
+      // console.log(reviews);
+      return reviews;
+    }
+  };
 
 
   // render our components once review metadata has been fetched
@@ -146,6 +176,7 @@ const ReviewParent = () => {
           fiveStarRatings,
           characteristics,
           allReviews, setAllReviews,
+          ratingFilter, setRatingFilter,
           visibleReviewsCounter, setVisibleReviewsCounter,
           visibleReviews,
           sortOn, setSortOn,
