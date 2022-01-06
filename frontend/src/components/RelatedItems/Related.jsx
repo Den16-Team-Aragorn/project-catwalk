@@ -34,15 +34,21 @@ const Related = () => {
           getReviews.push(axios.get(`/api/reviews/meta?product_id=${item}`));
         };
       });
+    }).catch(err => {
+      console.log(err)
     }).then(() => {
       Promise.all(getStyles).then((results) => {
         relatedObjects.push(results);
         setRelatedData(relatedObjects);
-      });
+      }).catch(err => {
+        console.log(err)
+      });;
       Promise.all(getProducts).then((results) => {
         relatedObjectsDetail.push(results);
         setRelatedDataDetail(relatedObjectsDetail);
-      });
+      }).catch(err => {
+        console.log(err)
+      });;
       Promise.all(getReviews).then((results) => {
         var reviewArray = [];
         results.forEach((item, index) => {
@@ -61,17 +67,13 @@ const Related = () => {
         setRelatedReviews(reviewArray);
 
         })
+      }).catch(err => {
+        console.log(err)
       });
-    });
-  }, []);
-
-  if (currentItem.id == null) {
-    return null
-  }
-
-  if (relatedDataDetail.length === 0) {
-    return <div>LOADING</div>
-  }
+    }).catch(err => {
+      console.log(err)
+    });;
+  }, [currentItem]);
 
   if (currentItem.id == null) {
     return null
