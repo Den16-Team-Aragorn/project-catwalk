@@ -700,7 +700,7 @@ body {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .OutfitContext{
